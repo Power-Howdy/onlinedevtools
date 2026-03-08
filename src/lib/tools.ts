@@ -20,6 +20,11 @@ export const TOOLS = [
     description: "Convert Unix timestamp to human date and vice versa. Timezone support.",
   },
   {
+    slug: "cron-parser",
+    title: "Cron Expression Parser",
+    description: "Parse cron expressions. Convert to human-readable schedule (e.g. every 5 minutes).",
+  },
+  {
     slug: "regex-tester",
     title: "Regex Tester",
     description: "Test regular expressions with match highlighting and explanation.",
@@ -27,7 +32,7 @@ export const TOOLS = [
   {
     slug: "uuid-generator",
     title: "UUID Generator",
-    description: "Generate UUID v4 and v1. Bulk generation and copy to clipboard.",
+    description: "Generate UUID v4. Bulk generation and copy to clipboard.",
   },
   {
     slug: "markdown-previewer",

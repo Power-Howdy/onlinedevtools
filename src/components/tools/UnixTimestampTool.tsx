@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import toast from "react-hot-toast";
 
 function timestampToDate(input: string): { iso: string; local: string; timezone: string } {
   const trimmed = input.trim();
@@ -41,6 +42,10 @@ export function UnixTimestampTool() {
   const handleConvert = useCallback(() => {
     setError(null);
     setDateDetails(null);
+    if (!input.trim()) {
+      toast.error("Please enter a timestamp or date");
+      return;
+    }
     try {
       if (mode === "toDate") {
         const result = timestampToDate(input);
@@ -50,8 +55,10 @@ export function UnixTimestampTool() {
         setOutput(dateToTimestamp(input));
       }
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Conversion failed");
+      const msg = e instanceof Error ? e.message : "Conversion failed";
+      setError(msg);
       setOutput("");
+      toast.error(msg);
     }
   }, [input, mode]);
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
 
 function generateUuid(): string {
@@ -19,11 +20,16 @@ export function UuidGeneratorTool() {
   }, [count]);
 
   const handleCopy = useCallback(async () => {
-    if (uuids.length === 0) return;
+    if (uuids.length === 0) {
+      toast.error("Generate UUIDs first");
+      return;
+    }
     const ok = await copyToClipboard(uuids.join("\n"));
     if (ok) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    } else {
+      toast.error("Copy failed. Try selecting and copying manually.");
     }
   }, [uuids]);
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import toast from "react-hot-toast";
 import { copyToClipboard as copyText } from "@/lib/clipboard";
 
 type InputOutputProps = {
@@ -45,8 +46,10 @@ export function InputOutput({
         setOutput(result);
       }
     } catch (e) {
-      setError(e instanceof Error ? e.message : "An error occurred");
+      const msg = e instanceof Error ? e.message : "An error occurred";
+      setError(msg);
       setOutput("");
+      toast.error(msg);
     }
   }, [input, mode, inputMode, onTransform, onEncode, onDecode]);
 
@@ -56,6 +59,8 @@ export function InputOutput({
     if (ok) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    } else {
+      toast.error("Copy failed. Try selecting and copying manually.");
     }
   }, [output]);
 

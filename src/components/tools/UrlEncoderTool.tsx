@@ -8,6 +8,7 @@ function encodeUrl(input: string): string {
 }
 
 function decodeUrl(input: string): string {
+  if (!input.trim()) throw new Error("Please enter a URL-encoded string to decode");
   try {
     return decodeURIComponent(input.replace(/\+/g, " "));
   } catch {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
 
 function base64UrlDecode(str: string): string {
@@ -48,11 +49,17 @@ export function JwtDecoderTool() {
 
   const handleDecode = useCallback(() => {
     setError(null);
+    if (!input.trim()) {
+      toast.error("Please enter a JWT token");
+      return;
+    }
     try {
       setOutput(decodeJwt(input));
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Decode failed");
+      const msg = e instanceof Error ? e.message : "Decode failed";
+      setError(msg);
       setOutput("");
+      toast.error(msg);
     }
   }, [input]);
 
@@ -92,7 +99,11 @@ export function JwtDecoderTool() {
           <button
             onClick={async () => {
               const ok = await copyToClipboard(output);
-              if (!ok) setError("Copy failed. Try selecting and copying manually.");
+              if (!ok) {
+                const msg = "Copy failed. Try selecting and copying manually.";
+                setError(msg);
+                toast.error(msg);
+              }
             }}
             className="mt-2 px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700"
           >

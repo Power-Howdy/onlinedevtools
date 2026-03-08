@@ -3,6 +3,12 @@
 import { useCallback, useState } from "react";
 import { InputOutput } from "@/components/InputOutput";
 
+function validateJson(input: string): void {
+  const trimmed = input.trim();
+  if (!trimmed) throw new Error("Input is empty");
+  JSON.parse(trimmed);
+}
+
 function formatJson(input: string): string {
   const trimmed = input.trim();
   if (!trimmed) return "";
@@ -37,8 +43,8 @@ export function JsonFormatterTool() {
 
   const handleTransform = useCallback(
     (input: string) => {
+      validateJson(input);
       const trimmed = input.trim();
-      if (!trimmed) return "";
       const parsed = JSON.parse(trimmed);
       if (mode === "format") {
         return JSON.stringify(parsed, null, 2);

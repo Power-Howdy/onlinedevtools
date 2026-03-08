@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import toast from "react-hot-toast";
 
 function testRegex(pattern: string, text: string): { matches: string[]; error?: string } {
   if (!pattern.trim()) return { matches: [] };
@@ -19,7 +20,15 @@ export function RegexTesterTool() {
   const [result, setResult] = useState<{ matches: string[]; error?: string } | null>(null);
 
   const handleTest = useCallback(() => {
-    setResult(testRegex(pattern, text));
+    if (!pattern.trim()) {
+      toast.error("Please enter a regular expression");
+      return;
+    }
+    const result = testRegex(pattern, text);
+    setResult(result);
+    if (result.error) {
+      toast.error(result.error);
+    }
   }, [pattern, text]);
 
   return (

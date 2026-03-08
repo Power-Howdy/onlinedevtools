@@ -6,7 +6,7 @@ import { InputOutput } from "@/components/InputOutput";
 
 function formatSql(input: string): string {
   const trimmed = input.trim();
-  if (!trimmed) return "";
+  if (!trimmed) throw new Error("Please enter a SQL query to format");
   return format(trimmed, { language: "sql", keywordCase: "upper" });
 }
 

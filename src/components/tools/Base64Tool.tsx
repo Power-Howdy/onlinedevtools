@@ -30,8 +30,14 @@ function base64Decode(input: string): string {
 }
 
 export function Base64Tool() {
-  const handleEncode = useCallback((input: string) => base64Encode(input), []);
-  const handleDecode = useCallback((input: string) => base64Decode(input), []);
+  const handleEncode = useCallback((input: string) => {
+    if (!input.trim()) throw new Error("Please enter text to encode");
+    return base64Encode(input);
+  }, []);
+  const handleDecode = useCallback((input: string) => {
+    if (!input.trim()) throw new Error("Please enter Base64 string to decode");
+    return base64Decode(input);
+  }, []);
 
   return (
     <InputOutput

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import toast from "react-hot-toast";
 import { diffLines, Change } from "diff";
 
 function getChangeClass(change: Change): string {
@@ -15,6 +16,10 @@ export function DiffCheckerTool() {
   const [diffResult, setDiffResult] = useState<Change[] | null>(null);
 
   const handleDiff = useCallback(() => {
+    if (!text1.trim() && !text2.trim()) {
+      toast.error("Please enter text in at least one field to compare");
+      return;
+    }
     const changes = diffLines(text1, text2);
     setDiffResult(changes);
   }, [text1, text2]);

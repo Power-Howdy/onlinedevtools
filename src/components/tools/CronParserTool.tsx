@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import toast from "react-hot-toast";
 import cronstrue from "cronstrue";
 
 export function CronParserTool() {
@@ -12,15 +13,17 @@ export function CronParserTool() {
     setError(null);
     const trimmed = input.trim();
     if (!trimmed) {
-      setOutput("");
+      toast.error("Please enter a cron expression");
       return;
     }
     try {
       const description = cronstrue.toString(trimmed);
       setOutput(description);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Invalid cron expression");
+      const msg = e instanceof Error ? e.message : "Invalid cron expression";
+      setError(msg);
       setOutput("");
+      toast.error(msg);
     }
   }, [input]);
 

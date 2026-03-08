@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { RegexTesterTool } from "@/components/tools/RegexTesterTool";
+import { toolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Free Regex Tester Online",
-  description:
-    "Test regular expressions online. Match highlighting and validation. Free regex tester and validator.",
-};
+export const metadata: Metadata = toolMetadata(
+  "Free Regex Tester Online",
+  "Test regular expressions online. Match highlighting and validation. Free regex tester and validator.",
+  "regex-tester"
+);
 
 export default function RegexTesterPage() {
   return (
     <ToolLayout
+      slug="regex-tester"
       title="Regex Tester"
       description="Test your regular expression against sample text. See matches highlighted."
     >

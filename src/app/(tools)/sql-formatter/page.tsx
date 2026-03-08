@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { toolMetadata } from "@/lib/metadata";
 import { ToolLayout } from "@/components/ToolLayout";
 
 const SqlFormatterTool = dynamic(
@@ -7,15 +8,16 @@ const SqlFormatterTool = dynamic(
   { ssr: false, loading: () => <div className="animate-pulse text-neutral-500">Loading...</div> }
 );
 
-export const metadata: Metadata = {
-  title: "Free SQL Formatter Online",
-  description:
-    "Format and beautify SQL queries online. Indent and uppercase keywords. Free SQL formatter.",
-};
+export const metadata: Metadata = toolMetadata(
+  "Free SQL Formatter Online",
+  "Format and beautify SQL queries online. Indent and uppercase keywords. Free SQL formatter.",
+  "sql-formatter"
+);
 
 export default function SqlFormatterPage() {
   return (
     <ToolLayout
+      slug="sql-formatter"
       title="SQL Formatter"
       description="Paste SQL to format. Indents and uppercases keywords for readability."
     >

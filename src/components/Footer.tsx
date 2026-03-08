@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { AFFILIATES } from "@/data/affiliates";
 
 export function Footer() {
   return (
     <footer className="border-t border-neutral-200 dark:border-neutral-800 mt-auto">
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
           <div>
             <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
               Online Dev Tools
@@ -56,10 +57,37 @@ export function Footer() {
           </div>
           <div>
             <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
+              Recommended
+            </h3>
+            <ul className="text-sm text-neutral-500 dark:text-neutral-400 space-y-1">
+              {AFFILIATES.map((a) => (
+                <li key={a.title}>
+                  <a
+                    href={a.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                  >
+                    {a.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
               About
             </h3>
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
               Built for developers who need quick, reliable tools. No sign-up, no tracking, no installation. All processing happens locally in your browser.
+            </p>
+            <p className="mt-2 text-sm">
+              <a
+                href="mailto:giftedclan0305@gmail.com?subject=Pro%20API%20Interest"
+                className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 underline"
+              >
+                Need API access? Pro coming soon
+              </a>
             </p>
           </div>
         </div>

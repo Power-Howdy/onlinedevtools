@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { ToolAnalyticsProvider } from "@/contexts/ToolAnalyticsContext";
 
 type ToolLayoutProps = {
   title: string;
   description: string;
+  slug?: string;
   children: React.ReactNode;
 };
 
-export function ToolLayout({ title, description, children }: ToolLayoutProps) {
-  return (
+export function ToolLayout({ title, description, slug, children }: ToolLayoutProps) {
+  const content = (
     <section className="max-w-4xl mx-auto px-4 py-8">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
@@ -19,5 +21,10 @@ export function ToolLayout({ title, description, children }: ToolLayoutProps) {
       </div>
       {children}
     </section>
+  );
+  return slug ? (
+    <ToolAnalyticsProvider slug={slug}>{content}</ToolAnalyticsProvider>
+  ) : (
+    content
   );
 }

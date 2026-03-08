@@ -54,6 +54,31 @@ export const TOOLS = [
     title: "URL Encoder / Decoder",
     description: "Encode and decode URL parameters. Percent encoding support.",
   },
+  {
+    slug: "bcrypt-generator",
+    title: "Bcrypt Generator",
+    description: "Hash passwords with bcrypt. Compare hashes to verify.",
+  },
+  {
+    slug: "sha256-generator",
+    title: "SHA256 Generator",
+    description: "Generate SHA256 hashes from text. Fast, client-side hashing.",
+  },
+  {
+    slug: "html-encoder",
+    title: "HTML Entity Encoder",
+    description: "Encode and decode HTML entities (&, <, >, \", ').",
+  },
+  {
+    slug: "color-converter",
+    title: "Color Converter",
+    description: "Convert between HEX, RGB, and HSL color formats.",
+  },
+  {
+    slug: "random-data",
+    title: "Random Data Generator",
+    description: "Generate random strings, numbers, UUIDs, JSON, and hex.",
+  },
 ] as const;
 
 export type ToolSlug = (typeof TOOLS)[number]["slug"];

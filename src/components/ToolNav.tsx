@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { TOOLS } from "@/lib/tools";
+import { RecentTools } from "@/components/RecentTools";
 
 export function ToolNav() {
   const pathname = usePathname();
@@ -36,6 +37,7 @@ export function ToolNav() {
     <>
       {/* Desktop sidebar */}
       <aside className="hidden md:flex w-56 shrink-0 flex-col border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-4 pl-4 pr-2">
+        <RecentTools />
         <h2 className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
           Tools
         </h2>
@@ -84,7 +86,8 @@ export function ToolNav() {
         />
       )}
       {mobileOpen && (
-        <aside className="md:hidden fixed top-0 left-0 z-50 h-full w-56 border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-4 pl-4 pr-2">
+        <aside className="md:hidden fixed top-0 left-0 z-50 h-full w-56 border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-4 pl-4 pr-2 overflow-y-auto">
+          <RecentTools />
           <h2 className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
             Tools
           </h2>

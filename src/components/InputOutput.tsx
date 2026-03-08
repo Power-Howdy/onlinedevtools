@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import { copyToClipboard as copyText } from "@/lib/clipboard";
+import { useToolSlug } from "@/contexts/ToolAnalyticsContext";
+import { trackEvent } from "@/lib/analytics";
 
 type InputOutputProps = {
   inputLabel?: string;
@@ -34,9 +36,14 @@ export function InputOutput({
   );
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const outputRef = useRef<HTMLTextAreaElement>(null);
+  const toolSlug = useToolSlug();
 
   const handleTransform = useCallback(async () => {
     setError(null);
+    setIsPending(true);
     try {
       if (inputMode === "both" && onEncode && onDecode) {
         const result = mode === "encode" ? onEncode(input) : onDecode(input);
@@ -45,13 +52,42 @@ export function InputOutput({
         const result = await onTransform(input);
         setOutput(result);
       }
+      if (toolSlug) trackEvent(toolSlug, "transform");
     } catch (e) {
       const msg = e instanceof Error ? e.message : "An error occurred";
       setError(msg);
       setOutput("");
       toast.error(msg);
+    } finally {
+      setIsPending(false);
     }
-  }, [input, mode, inputMode, onTransform, onEncode, onDecode]);
+  }, [input, mode, inputMode, onTransform, onEncode, onDecode, toolSlug]);
+
+  const clearAll = useCallback(() => {
+    setInput("");
+    setOutput("");
+    setError(null);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      const isInput = inputRef.current?.contains(target);
+      const isOutput = outputRef.current?.contains(target);
+      if (!isInput && !isOutput) return;
+      const mod = e.ctrlKey || e.metaKey;
+      if (mod && e.key === "Enter") {
+        e.preventDefault();
+        handleTransform();
+      }
+      if (mod && e.key === "k") {
+        e.preventDefault();
+        clearAll();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleTransform, clearAll]);
 
   const copyToClipboard = useCallback(async () => {
     if (!output) return;
@@ -59,10 +95,11 @@ export function InputOutput({
     if (ok) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      if (toolSlug) trackEvent(toolSlug, "copy");
     } else {
       toast.error("Copy failed. Try selecting and copying manually.");
     }
-  }, [output]);
+  }, [output, toolSlug]);
 
   const downloadOutput = useCallback(() => {
     if (!output) return;
@@ -74,12 +111,6 @@ export function InputOutput({
     a.click();
     URL.revokeObjectURL(url);
   }, [output]);
-
-  const clearAll = useCallback(() => {
-    setInput("");
-    setOutput("");
-    setError(null);
-  }, []);
 
   return (
     <div className="space-y-4">
@@ -115,6 +146,7 @@ export function InputOutput({
           {inputLabel}
         </label>
         <textarea
+          ref={inputRef}
           id="input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -126,12 +158,15 @@ export function InputOutput({
       <div className="flex gap-2">
         <button
           onClick={handleTransform}
-          className="px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium rounded-lg hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors"
+          disabled={isPending}
+          aria-label={inputMode === "both" ? (mode === "encode" ? "Encode" : "Decode") : "Transform"}
+          className="px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium rounded-lg hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          {inputMode === "both" ? (mode === "encode" ? "Encode" : "Decode") : "Transform"}
+          {isPending ? "..." : inputMode === "both" ? (mode === "encode" ? "Encode" : "Decode") : "Transform"}
         </button>
         <button
           onClick={clearAll}
+          aria-label="Clear input and output"
           className="px-4 py-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-medium rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
         >
           Clear
@@ -150,6 +185,7 @@ export function InputOutput({
           {outputLabel}
         </label>
         <textarea
+          ref={outputRef}
           id="output"
           value={output}
           readOnly={readOnly}
@@ -162,12 +198,14 @@ export function InputOutput({
         <div className="flex gap-2">
           <button
             onClick={copyToClipboard}
+            aria-label="Copy output"
             className="px-4 py-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-medium rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors text-sm"
           >
             {copied ? "Copied!" : "Copy"}
           </button>
           <button
             onClick={downloadOutput}
+            aria-label="Download output"
             className="px-4 py-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-medium rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors text-sm"
           >
             Download

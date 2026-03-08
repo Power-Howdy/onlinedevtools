@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { copyToClipboard as copyText } from "@/lib/clipboard";
 
 type InputOutputProps = {
   inputLabel?: string;
@@ -51,9 +52,11 @@ export function InputOutput({
 
   const copyToClipboard = useCallback(async () => {
     if (!output) return;
-    await navigator.clipboard.writeText(output);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    const ok = await copyText(output);
+    if (ok) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   }, [output]);
 
   const downloadOutput = useCallback(() => {

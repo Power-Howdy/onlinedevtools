@@ -2,15 +2,21 @@
 
 import { useState, useCallback } from "react";
 
-function timestampToDate(input: string): string {
+function timestampToDate(input: string): { iso: string; local: string; timezone: string } {
   const trimmed = input.trim();
-  if (!trimmed) return "";
+  if (!trimmed) return { iso: "", local: "", timezone: "" };
   const num = parseInt(trimmed, 10);
   if (isNaN(num)) throw new Error("Invalid timestamp: must be a number");
   const ms = trimmed.length <= 10 ? num * 1000 : num;
   const date = new Date(ms);
   if (isNaN(date.getTime())) throw new Error("Invalid timestamp");
-  return date.toISOString();
+  const iso = date.toISOString();
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const local = date.toLocaleString(undefined, {
+    dateStyle: "medium",
+    timeStyle: "long",
+  });
+  return { iso, local, timezone };
 }
 
 function dateToTimestamp(input: string): string {
@@ -26,13 +32,23 @@ export function UnixTimestampTool() {
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState<"toDate" | "toTimestamp">("toDate");
   const [error, setError] = useState<string | null>(null);
+  const [dateDetails, setDateDetails] = useState<{
+    iso: string;
+    local: string;
+    timezone: string;
+  } | null>(null);
 
   const handleConvert = useCallback(() => {
     setError(null);
+    setDateDetails(null);
     try {
-      const result =
-        mode === "toDate" ? timestampToDate(input) : dateToTimestamp(input);
-      setOutput(result);
+      if (mode === "toDate") {
+        const result = timestampToDate(input);
+        setDateDetails(result);
+        setOutput(`${result.iso}\n\nLocal (${result.timezone}): ${result.local}`);
+      } else {
+        setOutput(dateToTimestamp(input));
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Conversion failed");
       setOutput("");
@@ -94,8 +110,13 @@ export function UnixTimestampTool() {
         <div>
           <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
             Result
+            {dateDetails && (
+              <span className="ml-2 font-normal text-neutral-500 dark:text-neutral-400">
+                (Timezone: {dateDetails.timezone})
+              </span>
+            )}
           </label>
-          <div className="p-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-900/50 font-mono text-sm">
+          <div className="p-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-900/50 font-mono text-sm whitespace-pre-wrap">
             {output}
           </div>
         </div>

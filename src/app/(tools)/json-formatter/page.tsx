@@ -3,16 +3,16 @@ import { ToolLayout } from "@/components/ToolLayout";
 import { JsonFormatterTool } from "@/components/tools/JsonFormatterTool";
 
 export const metadata: Metadata = {
-  title: "Free JSON Formatter Online – Format & Validate JSON",
+  title: "Free JSON Formatter & TypeScript Interface Generator Online",
   description:
-    "Format, validate, and beautify JSON online. Syntax highlighting, collapse/expand tree. Free JSON formatter and validator.",
+    "Format and validate JSON online. Generate TypeScript interfaces from JSON. Free JSON formatter, validator, and JSON-to-TypeScript converter.",
 };
 
 export default function JsonFormatterPage() {
   return (
     <ToolLayout
-      title="JSON Formatter"
-      description="Format and validate JSON. Paste your JSON below to format, validate, and copy the output."
+      title="JSON Formatter & TypeScript Interface Generator"
+      description="Format and validate JSON, or generate TypeScript interfaces from your JSON. Paste your JSON below."
     >
       <JsonFormatterTool />
     </ToolLayout>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { copyToClipboard } from "@/lib/clipboard";
 
 function generateUuid(): string {
   return crypto.randomUUID();
@@ -19,9 +20,11 @@ export function UuidGeneratorTool() {
 
   const handleCopy = useCallback(async () => {
     if (uuids.length === 0) return;
-    await navigator.clipboard.writeText(uuids.join("\n"));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    const ok = await copyToClipboard(uuids.join("\n"));
+    if (ok) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   }, [uuids]);
 
   return (

@@ -31,7 +31,13 @@ npm run build
 npm start
 ```
 
+## Deployment
+
+1. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` to your production URL (e.g. `https://yourdomain.com`).
+2. Run `npm run build` and `npm start`, or deploy to Vercel/Netlify.
+3. Ensure the site is served over HTTPS (required for clipboard API).
+
 ## SEO
 
-- Set `NEXT_PUBLIC_SITE_URL` for production sitemap and robots.txt
-- Each tool has its own page with SEO metadata
+- Set `NEXT_PUBLIC_SITE_URL` for production sitemap, robots.txt, and Open Graph meta.
+- Each tool has its own page with SEO metadata.

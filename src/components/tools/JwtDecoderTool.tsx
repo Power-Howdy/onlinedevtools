@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { copyToClipboard } from "@/lib/clipboard";
 
 function base64UrlDecode(str: string): string {
   let base64 = str.replace(/-/g, "+").replace(/_/g, "/");
@@ -89,7 +90,10 @@ export function JwtDecoderTool() {
             {output}
           </pre>
           <button
-            onClick={() => navigator.clipboard.writeText(output)}
+            onClick={async () => {
+              const ok = await copyToClipboard(output);
+              if (!ok) setError("Copy failed. Try selecting and copying manually.");
+            }}
             className="mt-2 px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700"
           >
             Copy

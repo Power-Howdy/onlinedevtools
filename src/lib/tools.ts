@@ -1,8 +1,8 @@
 export const TOOLS = [
   {
     slug: "json-formatter",
-    title: "JSON Formatter",
-    description: "Format and validate JSON with syntax highlighting. Copy or download formatted output.",
+    title: "JSON Formatter & TypeScript Generator",
+    description: "Format and validate JSON. Generate TypeScript interfaces from JSON. Copy or download output.",
   },
   {
     slug: "jwt-decoder",

@@ -7,6 +7,8 @@ import { Footer } from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools.com";
+
 export const metadata: Metadata = {
   title: {
     default: "Online Dev Tools - Free Developer Utilities",
@@ -14,6 +16,21 @@ export const metadata: Metadata = {
   },
   description:
     "Free online developer tools: JSON formatter, JWT decoder, Base64 encoder, Unix timestamp converter, regex tester, and more. No installation required.",
+  metadataBase: new URL(baseUrl),
+  openGraph: {
+    title: "Online Dev Tools - Free Developer Utilities",
+    description:
+      "Free online developer tools: JSON formatter, JWT decoder, Base64 encoder, Unix timestamp converter, regex tester, and more.",
+    url: baseUrl,
+    siteName: "Online Dev Tools",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Online Dev Tools - Free Developer Utilities",
+    description:
+      "Free online developer tools: JSON formatter, JWT decoder, Base64 encoder, and more.",
+  },
 };
 
 export default function RootLayout({

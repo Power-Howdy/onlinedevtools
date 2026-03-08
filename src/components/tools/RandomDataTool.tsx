@@ -52,7 +52,16 @@ function randomJson(): string {
         };
     }
   }
-  return JSON.stringify(gen(), null, 2);
+  // Always return a root object or array (never bare primitives)
+  const root = randomInt(0, 1) === 0
+    ? Array.from({ length: randomInt(1, 4) }, () => gen())
+    : Object.fromEntries(
+        Array.from({ length: randomInt(2, 5) }, () => [
+          randomString(randomInt(3, 8)),
+          gen(),
+        ])
+      );
+  return JSON.stringify(root, null, 2);
 }
 
 export function RandomDataTool() {

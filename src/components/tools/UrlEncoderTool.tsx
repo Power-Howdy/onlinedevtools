@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { InputOutput } from "@/components/InputOutput";
 
 function encodeUrl(input: string): string {
+  if (!input.trim()) throw new Error("Please enter text to encode");
   return encodeURIComponent(input);
 }
 

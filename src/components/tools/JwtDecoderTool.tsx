@@ -100,9 +100,7 @@ export function JwtDecoderTool() {
             onClick={async () => {
               const ok = await copyToClipboard(output);
               if (!ok) {
-                const msg = "Copy failed. Try selecting and copying manually.";
-                setError(msg);
-                toast.error(msg);
+                toast.error("Copy failed. Try selecting and copying manually.");
               }
             }}
             className="mt-2 px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700"

@@ -3,17 +3,10 @@
 import { useCallback, useState } from "react";
 import { InputOutput } from "@/components/InputOutput";
 
-function validateJson(input: string): void {
+function parseJson(input: string): unknown {
   const trimmed = input.trim();
   if (!trimmed) throw new Error("Input is empty");
-  JSON.parse(trimmed);
-}
-
-function formatJson(input: string): string {
-  const trimmed = input.trim();
-  if (!trimmed) return "";
-  const parsed = JSON.parse(trimmed);
-  return JSON.stringify(parsed, null, 2);
+  return JSON.parse(trimmed);
 }
 
 function jsonToTypeScript(obj: unknown, name = "Root"): string {
@@ -43,9 +36,7 @@ export function JsonFormatterTool() {
 
   const handleTransform = useCallback(
     (input: string) => {
-      validateJson(input);
-      const trimmed = input.trim();
-      const parsed = JSON.parse(trimmed);
+      const parsed = parseJson(input);
       if (mode === "format") {
         return JSON.stringify(parsed, null, 2);
       }

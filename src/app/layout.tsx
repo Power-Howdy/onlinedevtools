@@ -6,7 +6,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/Toaster";
 import { JsonLd } from "@/components/JsonLd";
-import { AdSlot } from "@/components/AdSlot";
 import { Analytics } from "@/components/Analytics";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -55,9 +54,6 @@ export default function RootLayout({
         <JsonLd />
         <Analytics />
         <Header />
-        <div className="max-w-6xl mx-auto w-full px-4 py-2 hidden sm:block">
-          <AdSlot format="horizontal" className="max-w-full" />
-        </div>
         <main className="flex-1">{children}</main>
         <Footer />
         <Toaster />

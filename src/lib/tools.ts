@@ -1,0 +1,54 @@
+export const TOOLS = [
+  {
+    slug: "json-formatter",
+    title: "JSON Formatter",
+    description: "Format and validate JSON with syntax highlighting. Copy or download formatted output.",
+  },
+  {
+    slug: "jwt-decoder",
+    title: "JWT Decoder",
+    description: "Decode and inspect JWT tokens. View header, payload, and expiration.",
+  },
+  {
+    slug: "base64-encoder",
+    title: "Base64 Encoder / Decoder",
+    description: "Encode and decode Base64 strings. Works with text and binary data.",
+  },
+  {
+    slug: "unix-timestamp",
+    title: "Unix Timestamp Converter",
+    description: "Convert Unix timestamp to human date and vice versa. Timezone support.",
+  },
+  {
+    slug: "regex-tester",
+    title: "Regex Tester",
+    description: "Test regular expressions with match highlighting and explanation.",
+  },
+  {
+    slug: "uuid-generator",
+    title: "UUID Generator",
+    description: "Generate UUID v4 and v1. Bulk generation and copy to clipboard.",
+  },
+  {
+    slug: "markdown-previewer",
+    title: "Markdown Previewer",
+    description: "Preview Markdown as HTML. Export rendered output.",
+  },
+  {
+    slug: "diff-checker",
+    title: "Diff Checker",
+    description: "Compare two texts or code blocks. Side-by-side and unified views.",
+  },
+  {
+    slug: "sql-formatter",
+    title: "SQL Formatter",
+    description: "Format and beautify SQL queries. Indent and uppercase keywords.",
+  },
+  {
+    slug: "url-encoder",
+    title: "URL Encoder / Decoder",
+    description: "Encode and decode URL parameters. Percent encoding support.",
+  },
+] as const;
+
+export type ToolSlug = (typeof TOOLS)[number]["slug"];

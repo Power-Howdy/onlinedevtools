@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #171717;
+  --background: #fafafa;
+  --card: #ffffff;
+  --card-border: #e5e5e5;
+  --muted: #737373;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #ededed;
+    --background: #0a0a0a;
+    --card: #171717;
+    --card-border: #262626;
+    --muted: #a3a3a3;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}

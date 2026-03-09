@@ -79,6 +79,19 @@ export function Footer() {
         </div>
         <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800 text-sm text-neutral-500 dark:text-neutral-400 text-center">
           © {new Date().getFullYear()} Online Dev Tools. All tools are free to use.
+          {process.env.NEXT_PUBLIC_GITHUB_REPO && (
+            <>
+              {" · "}
+              <a
+                href={process.env.NEXT_PUBLIC_GITHUB_REPO}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-neutral-900 dark:hover:text-neutral-100 underline"
+              >
+                GitHub
+              </a>
+            </>
+          )}
         </div>
       </div>
     </footer>

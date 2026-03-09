@@ -27,12 +27,14 @@ export const metadata: Metadata = {
     url: baseUrl,
     siteName: "Online Dev Tools",
     type: "website",
+    images: ["/assets/image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Online Dev Tools - Free Developer Utilities",
     description:
       "Free online developer tools: JSON formatter, JWT decoder, Base64 encoder, and more.",
+    images: ["/assets/image.png"],
   },
   icons: {
     icon: "/assets/icon.png",

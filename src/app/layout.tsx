@@ -34,6 +34,10 @@ export const metadata: Metadata = {
     description:
       "Free online developer tools: JSON formatter, JWT decoder, Base64 encoder, and more.",
   },
+  icons: {
+    icon: "/assets/icon.png",
+    apple: "/assets/icon.png",
+  },
 };
 
 export default function RootLayout({

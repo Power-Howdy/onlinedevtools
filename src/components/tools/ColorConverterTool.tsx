@@ -218,7 +218,7 @@ export function ColorConverterTool() {
     setOutput({
       hex: hexOut,
       rgb: `rgb(${r}, ${g}, ${b})`,
-      ...(hasAlpha && { rgba: `rgba(${r}, ${g}, ${b}, ${(alpha / 100).toFixed(2)})` }),
+      ...(hasAlpha && { rgba: `rgba(${r}, ${g}, ${b}, ${(alpha! / 100).toFixed(2)})` }),
       hsl: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`,
       ...(hasAlpha && { hsla: `hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%, ${(alpha! / 100).toFixed(2)})` }),
     });

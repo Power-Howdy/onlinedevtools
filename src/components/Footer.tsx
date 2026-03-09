@@ -1,11 +1,8 @@
-import Link from "next/link";
-import { AFFILIATES } from "@/data/affiliates";
-
 export function Footer() {
   return (
     <footer className="border-t border-neutral-200 dark:border-neutral-800 mt-auto">
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
               Online Dev Tools
@@ -16,62 +13,51 @@ export function Footer() {
           </div>
           <div>
             <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-              Tools
-            </h3>
-            <ul className="text-sm text-neutral-500 dark:text-neutral-400 space-y-1">
-              <li>
-                <Link href="/json-formatter" className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
-                  JSON Formatter
-                </Link>
-              </li>
-              <li>
-                <Link href="/jwt-decoder" className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
-                  JWT Decoder
-                </Link>
-              </li>
-              <li>
-                <Link href="/base64-encoder" className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
-                  Base64 Encoder
-                </Link>
-              </li>
-              <li>
-                <Link href="/" className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
-                  All Tools
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
               Contact
             </h3>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
               Questions or feedback?{" "}
+              
+            </p>
+            <ul className="text-sm text-neutral-500 dark:text-neutral-400 space-y-1">
+              <li>
               <a
-                href="mailto:contact@example.com"
+                href="mailto:giftedclan0305@gmail.com"
                 className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline"
               >
-                giftedclan0305@gmail.com
+                Email
               </a>
-            </p>
-          </div>
-          <div>
-            <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-              Recommended
-            </h3>
-            <ul className="text-sm text-neutral-500 dark:text-neutral-400 space-y-1">
-              {AFFILIATES.map((a) => (
-                <li key={a.title}>
-                  <a
-                    href={a.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-                  >
-                    {a.title}
-                  </a>
-                </li>
-              ))}
+              </li>
+              <li>
+                <a
+                  href="https://x.com/coocoohive"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline"
+                >
+                  X (Twitter)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/giftedclan0305"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline"
+                >
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.indiehackers.com/IndieHacker0228"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline"
+                >
+                  Indie Hackers
+                </a>
+              </li>
             </ul>
           </div>
           <div>

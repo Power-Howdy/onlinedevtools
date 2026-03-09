@@ -6,7 +6,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/Toaster";
 import { JsonLd } from "@/components/JsonLd";
-import { Analytics } from "@/components/Analytics";
+// import { Analytics } from "@/components/Analytics";
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 

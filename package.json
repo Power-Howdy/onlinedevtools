@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "bcryptjs": "^3.0.3",
     "cronstrue": "^2.47.0",
     "diff": "^7.0.0",

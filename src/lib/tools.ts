@@ -79,6 +79,11 @@ export const TOOLS = [
     title: "Random Data Generator",
     description: "Generate random strings, numbers, UUIDs, JSON, and hex.",
   },
+  {
+    slug: "open-graph-viewer",
+    title: "Open Graph Viewer",
+    description: "Fetch and inspect Open Graph metadata for any URL.",
+  },
 ] as const;
 
 export type ToolSlug = (typeof TOOLS)[number]["slug"];

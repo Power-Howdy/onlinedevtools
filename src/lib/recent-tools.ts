@@ -71,7 +71,7 @@ export function addRecentTool(slug: string): void {
   const now = Date.now();
   const existing = state.items.find((item) => item.slug === slug);
   const updated: RecentToolEntry = {
-    slug,
+    slug: slug as ToolSlug,
     lastUsedAt: now,
     isFavorite: existing?.isFavorite,
   };

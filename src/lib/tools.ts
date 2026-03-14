@@ -5,9 +5,19 @@ export const TOOLS = [
     description: "Format and validate JSON. Generate TypeScript interfaces from JSON. Copy or download output.",
   },
   {
+    slug: "json-to-csv",
+    title: "JSON to CSV Converter",
+    description: "Convert JSON array to CSV. Flatten objects and download or copy CSV.",
+  },
+  {
     slug: "jwt-decoder",
     title: "JWT Decoder",
     description: "Decode and inspect JWT tokens. View header, payload, and expiration.",
+  },
+  {
+    slug: "jwt-generator",
+    title: "JWT Generator",
+    description: "Generate JWT tokens with custom header and payload. Sign with HMAC-SHA256. Pair with JWT Decoder.",
   },
   {
     slug: "base64-encoder",
@@ -60,6 +70,11 @@ export const TOOLS = [
     description: "Hash passwords with bcrypt. Compare hashes to verify.",
   },
   {
+    slug: "password-generator",
+    title: "Password Generator",
+    description: "Generate secure random passwords. Customize length and character types.",
+  },
+  {
     slug: "sha256-generator",
     title: "SHA256 Generator",
     description: "Generate SHA256 hashes from text. Fast, client-side hashing.",
@@ -68,6 +83,11 @@ export const TOOLS = [
     slug: "html-encoder",
     title: "HTML Entity Encoder",
     description: "Encode and decode HTML entities (&, <, >, \", ').",
+  },
+  {
+    slug: "html-to-markdown",
+    title: "HTML to Markdown Converter",
+    description: "Convert HTML to Markdown. Paste HTML and get clean Markdown output.",
   },
   {
     slug: "color-converter",

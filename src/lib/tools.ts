@@ -32,42 +32,10 @@ export const TOOLS: Tool[] = [
     category: "JSON",
   },
   {
-    slug: "json-to-typescript",
-    title: "JSON to TypeScript Interface Generator",
-    description: "Convert JSON to TypeScript interface online. Generate TypeScript types from JSON.",
-    category: "JSON",
-  },
-  {
-    slug: "json-to-python",
-    title: "JSON to Python Class Generator",
+    slug: "json-to-code",
+    title: "JSON to Code Generator",
     description:
-      "Convert JSON to Python dataclass or class online. Generate Python models from JSON.",
-    category: "JSON",
-  },
-  {
-    slug: "json-to-java",
-    title: "JSON to Java Class Generator",
-    description: "Convert JSON to Java POJO or record. Generate Java model classes from JSON.",
-    category: "JSON",
-  },
-  {
-    slug: "json-to-go",
-    title: "JSON to Go Struct Generator",
-    description: "Convert JSON to Go struct. Generate Go struct definitions from JSON.",
-    category: "JSON",
-  },
-  {
-    slug: "json-to-rust",
-    title: "JSON to Rust Struct Generator",
-    description:
-      "Convert JSON to Rust struct. Generate Rust struct and serde derives from JSON.",
-    category: "JSON",
-  },
-  {
-    slug: "json-to-csharp",
-    title: "JSON to C# Class Generator",
-    description:
-      "Convert JSON to C# class. Generate C# model classes with JsonProperty from JSON.",
+      "Convert JSON to TypeScript, Python, Java, Go, Rust, or C#. Select output language and generate types or classes.",
     category: "JSON",
   },
   {

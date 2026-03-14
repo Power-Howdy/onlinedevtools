@@ -3,32 +3,49 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { TOOLS } from "@/lib/tools";
+import { TOOLS, TOOL_CATEGORIES } from "@/lib/tools";
+
+const toolsByCategory = TOOL_CATEGORIES.map((category) => ({
+  category,
+  tools: TOOLS.filter((t) => t.category === category),
+}));
 
 export function ToolNav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navContent = (
-    <nav className="flex flex-col gap-0.5">
-      {TOOLS.map((tool) => {
-        const href = `/${tool.slug}`;
-        const isActive = pathname === href;
-        return (
-          <Link
-            key={tool.slug}
-            href={href}
-            onClick={() => setMobileOpen(false)}
-            className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              isActive
-                ? "bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100"
-                : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100"
-            }`}
-          >
-            {tool.title}
-          </Link>
-        );
-      })}
+    <nav className="flex flex-col gap-3">
+      {toolsByCategory.map(
+        ({ category, tools }) =>
+          tools.length > 0 && (
+            <div key={category}>
+              <h3 className="px-3 mb-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                {category}
+              </h3>
+              <div className="flex flex-col gap-0.5">
+                {tools.map((tool) => {
+                  const href = `/${tool.slug}`;
+                  const isActive = pathname === href;
+                  return (
+                    <Link
+                      key={tool.slug}
+                      href={href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                        isActive
+                          ? "bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100"
+                          : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100"
+                      }`}
+                    >
+                      {tool.title}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )
+      )}
     </nav>
   );
 

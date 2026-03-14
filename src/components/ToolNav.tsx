@@ -15,7 +15,7 @@ export function ToolNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navContent = (
-    <nav className="flex flex-col gap-3">
+    <nav className="flex flex-col gap-3 overflow-y-auto min-h-0 flex-1 pr-1">
       {toolsByCategory.map(
         ({ category, tools }) =>
           tools.length > 0 && (
@@ -51,9 +51,12 @@ export function ToolNav() {
 
   return (
     <>
-      {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-56 shrink-0 flex-col border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-4 pl-4 pr-2">
-        <h2 className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+      {/* Desktop sidebar - height = viewport minus header/footer, nav scrolls */}
+      <aside
+        className="hidden md:flex w-56 shrink-0 flex-col min-h-0 border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-4 pl-4 pr-2 overflow-hidden"
+        style={{ height: "calc(100vh - var(--header-height) - var(--footer-height) / 2)" }}
+      >
+        <h2 className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
           Tools
         </h2>
         {navContent}

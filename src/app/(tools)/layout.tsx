@@ -11,9 +11,11 @@ export default function ToolsLayout({
     <>
       <RecentToolsTracker />
       <RecentToolsPanel />
-      <div className="flex flex-1 flex-col md:flex-row">
+      <div
+        className="flex flex-col md:flex-row min-h-0 overflow-hidden md:h-[calc(100vh-var(--header-height)-var(--footer-height)/2)]"
+      >
         <ToolNav />
-        <div className="flex-1 min-w-0">{children}</div>
+        <div className="flex-1 min-w-0 min-h-0 overflow-y-auto">{children}</div>
       </div>
     </>
   );

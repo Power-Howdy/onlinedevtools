@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --header-height: 4.5rem;
+  --footer-height: 18rem;
   --foreground: #171717;
   --background: #fafafa;
   --card: #ffffff;
@@ -20,5 +22,14 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--card-border) 1px, transparent 0);
+  background-size: 24px 24px;
+  background-position: 0 0;
+}
+
+html.dark body {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(229, 211, 211, 0.281) 1px, transparent 0);
 }

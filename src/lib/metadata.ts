@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools-three.vercel.app";
 
 export function toolMetadata(
   title: string,

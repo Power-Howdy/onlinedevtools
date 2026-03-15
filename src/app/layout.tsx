@@ -11,7 +11,7 @@ import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools-three.vercel.app";
 
 export const metadata: Metadata = {
   title: {

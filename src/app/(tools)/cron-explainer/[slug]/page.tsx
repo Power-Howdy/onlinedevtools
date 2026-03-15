@@ -23,10 +23,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description = "Cron schedule explanation";
   }
   const title = `Cron ${entry.expr} - ${description}`;
+  const keywords = [
+    "cron explainer",
+    "cron expression",
+    "cron schedule",
+    entry.expr,
+    "cron parser",
+  ];
   return toolMetadata(
     title,
     `Understand cron expression "${entry.expr}". ${description}. Free cron explainer.`,
-    `cron-explainer/${slug}`
+    `cron-explainer/${slug}`,
+    keywords
   );
 }
 

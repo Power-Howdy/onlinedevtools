@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { Base64Tool } from "@/components/tools/Base64Tool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Free Base64 Encoder Decoder Online",
-  "Encode and decode Base64 strings online. Works with text and binary data. Free Base64 encoder and decoder.",
-  "base64-encoder"
-);
+export const metadata: Metadata = getToolMetadata("base64-encoder");
 
 export default function Base64EncoderPage() {
   return (

@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { JsonFormatterTool } from "@/components/tools/JsonFormatterTool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Free JSON Formatter & TypeScript Interface Generator Online",
-  "Format and validate JSON online. Generate TypeScript interfaces from JSON. Free JSON formatter, validator, and JSON-to-TypeScript converter.",
-  "json-formatter"
-);
+export const metadata: Metadata = getToolMetadata("json-formatter");
 
 export default function JsonFormatterPage() {
   return (

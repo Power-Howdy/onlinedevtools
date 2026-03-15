@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { OpenGraphViewerTool } from "@/components/tools/OpenGraphViewerTool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Open Graph Viewer – Preview OG tags for any URL",
-  "Fetch and inspect Open Graph metadata for any URL. Preview og:image, og:title, og:description, and more, similar to the Vercel Toolbar OG viewer.",
-  "open-graph-viewer"
-);
+export const metadata: Metadata = getToolMetadata("open-graph-viewer");
 
 export default function OpenGraphViewerPage() {
   return (

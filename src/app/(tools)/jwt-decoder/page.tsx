@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { JwtDecoderTool } from "@/components/tools/JwtDecoderTool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Free JWT Decoder Online – Decode JWT Token",
-  "Decode and inspect JWT tokens online. View header, payload, and expiration. Free JWT decoder and debugger.",
-  "jwt-decoder"
-);
+export const metadata: Metadata = getToolMetadata("jwt-decoder");
 
 export default function JwtDecoderPage() {
   return (

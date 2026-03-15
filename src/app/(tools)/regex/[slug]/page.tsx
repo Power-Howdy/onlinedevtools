@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!entry) return {};
   const title = `Regex for ${entry.name} - ${entry.pattern}`;
   const description = `${entry.explanation} Use this pattern: ${entry.pattern}`;
-  return toolMetadata(title, description, `regex/${slug}`);
+  return toolMetadata(title, description, `regex/${slug}`, [...entry.keywords]);
 }
 
 export default async function RegexPatternPage({ params }: Props) {

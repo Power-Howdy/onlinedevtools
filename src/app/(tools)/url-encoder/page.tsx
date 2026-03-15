@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { UrlEncoderTool } from "@/components/tools/UrlEncoderTool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Free URL Encoder Decoder Online",
-  "Encode and decode URL parameters online. Percent encoding. Free URL encoder and decoder.",
-  "url-encoder"
-);
+export const metadata: Metadata = getToolMetadata("url-encoder");
 
 export default function UrlEncoderPage() {
   return (

@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { CronParserTool } from "@/components/tools/CronParserTool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Free Cron Expression Parser Online",
-  "Parse and explain cron expressions. Convert cron syntax to human-readable schedule. Free cron expression parser.",
-  "cron-parser"
-);
+export const metadata: Metadata = getToolMetadata("cron-parser");
 
 export default function CronParserPage() {
   return (

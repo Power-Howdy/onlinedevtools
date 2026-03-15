@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { FormatConverterTool } from "@/components/tools/FormatConverterTool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Free CSV JSON XML YAML Converter Online",
-  "Convert between CSV, JSON, XML, and YAML online. Paste your data and convert between formats instantly. Free format converter.",
-  "format-converter"
-);
+export const metadata: Metadata = getToolMetadata("format-converter");
 
 export default function FormatConverterPage() {
   return (

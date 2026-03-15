@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { JsonToCsvTool } from "@/components/tools/JsonToCsvTool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Free JSON to CSV Converter Online",
-  "Convert JSON array to CSV online. Flatten objects, download or copy CSV. Free JSON to CSV converter.",
-  "json-to-csv"
-);
+export const metadata: Metadata = getToolMetadata("json-to-csv");
 
 export default function JsonToCsvPage() {
   return (

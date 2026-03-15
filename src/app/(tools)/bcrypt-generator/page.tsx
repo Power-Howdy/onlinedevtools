@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { BcryptGeneratorTool } from "@/components/tools/BcryptGeneratorTool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Free Bcrypt Password Hasher Online",
-  "Hash passwords with bcrypt online. Compare hashes to verify passwords. Free bcrypt generator and verifier.",
-  "bcrypt-generator"
-);
+export const metadata: Metadata = getToolMetadata("bcrypt-generator");
 
 export default function BcryptGeneratorPage() {
   return (

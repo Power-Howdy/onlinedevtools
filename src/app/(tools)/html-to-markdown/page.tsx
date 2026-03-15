@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { ToolLayout } from "@/components/ToolLayout";
 import { HtmlToMarkdownTool } from "@/components/tools/HtmlToMarkdownTool";
-import { toolMetadata } from "@/lib/metadata";
+import { getToolMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = toolMetadata(
-  "Free HTML to Markdown Converter Online",
-  "Convert HTML to Markdown online. Paste HTML and get clean Markdown output. Free HTML to Markdown converter.",
-  "html-to-markdown"
-);
+export const metadata: Metadata = getToolMetadata("html-to-markdown");
 
 export default function HtmlToMarkdownPage() {
   return (

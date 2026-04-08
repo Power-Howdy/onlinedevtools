@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { TOOLS, type Tool } from "@/lib/tools";
 
 function toolMatches(tool: Tool, query: string): boolean {
@@ -18,6 +18,7 @@ function toolMatches(tool: Tool, query: string): boolean {
 
 export function ToolSearch() {
   const router = useRouter();
+  const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -37,6 +38,9 @@ export function ToolSearch() {
     setOpen(false);
     setQuery("");
     setActiveIndex(0);
+    // Drop focus so we are not stuck with a "focused" input after picking a result
+    // (mousedown preventDefault on links keeps focus on the input otherwise).
+    inputRef.current?.blur();
   }, []);
 
   useEffect(() => {
@@ -70,6 +74,10 @@ export function ToolSearch() {
     },
     [router, close]
   );
+
+  useEffect(() => {
+    close();
+  }, [pathname, close]);
 
   const onInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!open || filtered.length === 0) return;
@@ -159,7 +167,11 @@ export function ToolSearch() {
                       <Link
                         href={`/${tool.slug}`}
                         onMouseDown={(e) => e.preventDefault()}
-                        onClick={() => close()}
+                        onClick={(e) => {
+                          if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+                          e.preventDefault();
+                          goTo(tool.slug);
+                        }}
                         onMouseEnter={() => setActiveIndex(index)}
                         className={`block px-3 py-2.5 text-left transition-colors ${
                           active

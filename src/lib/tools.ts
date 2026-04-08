@@ -80,6 +80,25 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
+    slug: "json-compare",
+    title: "JSON Compare",
+    description:
+      "Compare two JSON documents structurally. Object key order is ignored; see aligned paths, added, removed, and changed values.",
+    category: "JSON",
+    seoTitle: "Free JSON Compare Online – Structural Diff",
+    seoDescription:
+      "Compare JSON online with structural diff. Ignores object key order. Side-by-side paths and values. Free JSON diff tool.",
+    keywords: [
+      "json compare",
+      "json diff",
+      "structural json diff",
+      "compare json",
+      "json difference",
+      "jsondiff",
+      "developer tools",
+    ],
+  },
+  {
     slug: "format-converter",
     title: "Format Converter",
     description: "Convert between CSV, JSON, XML, and YAML. Select source and target formats.",
@@ -217,6 +236,43 @@ export const TOOLS: Tool[] = [
       "url encoder",
       "url decoder",
       "encode url parameters",
+      "developer tools",
+    ],
+  },
+  {
+    slug: "cookie-compare",
+    title: "Cookie Header Viewer & Compare",
+    description:
+      "Parse Cookie header strings into name/value pairs. Compare two cookie headers side by side with added, removed, and changed values.",
+    category: "Encoding",
+    seoTitle: "Free Cookie Header Viewer & Compare Online",
+    seoDescription:
+      "View and compare HTTP Cookie headers online. Parse name=value pairs, highlight differences. Free cookie compare tool.",
+    keywords: [
+      "cookie header",
+      "cookie viewer",
+      "compare cookies",
+      "set-cookie",
+      "http cookie",
+      "cookie parser",
+      "developer tools",
+    ],
+  },
+  {
+    slug: "params-compare",
+    title: "Query Params Compare",
+    description:
+      "Compare query strings or full URLs. See which parameters differ, including repeated keys.",
+    category: "Encoding",
+    seoTitle: "Free Query String & URL Params Compare Online",
+    seoDescription:
+      "Compare URL query parameters online. Paste two URLs or query strings; see added, removed, and changed params.",
+    keywords: [
+      "query params compare",
+      "url params",
+      "compare query string",
+      "url comparison",
+      "search params",
       "developer tools",
     ],
   },

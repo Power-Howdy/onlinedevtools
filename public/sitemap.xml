@@ -2,241 +2,259 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://onlinedevtools-three.vercel.app</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/json-formatter</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/json-to-csv</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/json-to-code</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://onlinedevtools-three.vercel.app/json-compare</loc>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/format-converter</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/sql-formatter</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/diff-checker</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/markdown-previewer</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/html-to-markdown</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/color-converter</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/base64-encoder</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/url-encoder</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://onlinedevtools-three.vercel.app/cookie-compare</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://onlinedevtools-three.vercel.app/params-compare</loc>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/html-encoder</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/bcrypt-generator</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/password-generator</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/sha256-generator</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/jwt-decoder</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/jwt-generator</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/uuid-generator</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/random-data</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/unix-timestamp</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-parser</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/regex-tester</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/open-graph-viewer</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/every-hour</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/every-5-minutes</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/daily-midnight</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/daily-noon</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/weekly-sunday</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/monthly</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/weekdays-9am</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/every-15-minutes</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/every-2-hours</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/cron-explainer/daily-3-30am</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/regex/email</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/regex/url</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/regex/ipv4</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/regex/password</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/regex/phone</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://onlinedevtools-three.vercel.app/regex/hex-color</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

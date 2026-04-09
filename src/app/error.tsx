@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { Footer } from "@/components/Footer";
 
 export default function Error({
   error,
@@ -15,7 +16,8 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12 text-center">
+    <div className="flex flex-1 flex-col min-h-0 w-full">
+    <div className="flex-1 max-w-2xl mx-auto w-full px-4 py-12 text-center">
       <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
         Something went wrong
       </h2>
@@ -36,6 +38,8 @@ export default function Error({
           Go home
         </Link>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 }

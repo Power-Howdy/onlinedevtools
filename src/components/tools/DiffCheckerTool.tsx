@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
 import { diffLines, Change } from "diff";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 function getChangeClass(change: Change): string {
   if (change.added) return "bg-green-200 dark:bg-green-900/50";
@@ -10,9 +11,11 @@ function getChangeClass(change: Change): string {
   return "";
 }
 
+const DIFF_DEFAULTS = { text1: "", text2: "" };
+
 export function DiffCheckerTool() {
-  const [text1, setText1] = useState("");
-  const [text2, setText2] = useState("");
+  const [s, setS] = useToolSettings("main", DIFF_DEFAULTS);
+  const { text1, text2 } = s;
   const [diffResult, setDiffResult] = useState<Change[] | null>(null);
 
   const handleDiff = useCallback(() => {
@@ -33,7 +36,7 @@ export function DiffCheckerTool() {
           </label>
           <textarea
             value={text1}
-            onChange={(e) => setText1(e.target.value)}
+            onChange={(e) => setS((p) => ({ ...p, text1: e.target.value }))}
             placeholder="Original text..."
             rows={8}
             className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm focus:ring-2 focus:ring-neutral-400 outline-none resize-y"
@@ -45,7 +48,7 @@ export function DiffCheckerTool() {
           </label>
           <textarea
             value={text2}
-            onChange={(e) => setText2(e.target.value)}
+            onChange={(e) => setS((p) => ({ ...p, text2: e.target.value }))}
             placeholder="Modified text..."
             rows={8}
             className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm focus:ring-2 focus:ring-neutral-400 outline-none resize-y"

@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { InputOutput } from "@/components/InputOutput";
+import { useToolSettings } from "@/hooks/useToolSettings";
 import {
   jsonToTypeScript,
   jsonToPython,
@@ -32,18 +33,19 @@ const converters: Record<JsonToLangSlug, (obj: unknown) => string> = {
   csharp: (obj) => jsonToCSharp(obj),
 };
 
+const JSON_TO_LANG_DEFAULTS = { lang: "typescript" as JsonToLangSlug };
+
 export function JsonToLangTool() {
   const searchParams = useSearchParams();
   const langParam = searchParams.get("lang") as JsonToLangSlug | null;
-  const [lang, setLang] = useState<JsonToLangSlug>(
-    langParam && JSON_TO_LANG_LANGUAGES.includes(langParam) ? langParam : "typescript"
-  );
+  const [s, setS] = useToolSettings("main", JSON_TO_LANG_DEFAULTS);
+  const langFromUrl =
+    langParam && JSON_TO_LANG_LANGUAGES.includes(langParam) ? langParam : null;
+  const lang = langFromUrl ?? s.lang;
 
   useEffect(() => {
-    if (langParam && JSON_TO_LANG_LANGUAGES.includes(langParam)) {
-      setLang(langParam);
-    }
-  }, [langParam]);
+    if (langFromUrl) setS((p) => ({ ...p, lang: langFromUrl }));
+  }, [langFromUrl, setS]);
 
   const convert = converters[lang];
   const handleTransform = useCallback(
@@ -66,7 +68,9 @@ export function JsonToLangTool() {
         <select
           id="output-lang"
           value={lang}
-          onChange={(e) => setLang(e.target.value as JsonToLangSlug)}
+          onChange={(e) =>
+            setS((p) => ({ ...p, lang: e.target.value as JsonToLangSlug }))
+          }
           className="px-3 py-1.5 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 text-sm font-medium focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 focus:border-transparent outline-none"
         >
           {JSON_TO_LANG_LANGUAGES.map((l) => (

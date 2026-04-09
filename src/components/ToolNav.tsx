@@ -15,7 +15,7 @@ export function ToolNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navContent = (
-    <nav className="flex flex-col gap-3 overflow-y-auto min-h-0 flex-1 pr-1">
+    <nav className="flex flex-col gap-3 pr-1">
       {toolsByCategory.map(
         ({ category, tools }) =>
           tools.length > 0 && (
@@ -51,10 +51,9 @@ export function ToolNav() {
 
   return (
     <>
-      {/* Desktop sidebar - height = viewport minus header/footer, nav scrolls */}
+      {/* Desktop sidebar: sticky under header, scroll internal list if tall */}
       <aside
-        className="hidden md:flex w-56 shrink-0 flex-col min-h-0 border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-4 pl-4 pr-2 overflow-hidden"
-        style={{ height: "calc(100vh - var(--header-height) - var(--footer-height) / 2)" }}
+        className="sidebar-scrollbar hidden md:flex w-56 shrink-0 flex-col min-h-0 border-r border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-950/70 backdrop-blur-sm py-4 pl-4 pr-2 md:sticky md:top-[var(--header-height)] md:self-start md:max-h-[calc(100dvh-var(--header-height))] md:overflow-y-auto"
       >
         <h2 className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
           Tools
@@ -63,7 +62,7 @@ export function ToolNav() {
       </aside>
 
       {/* Mobile: toggle button */}
-      <div className="md:hidden border-b border-neutral-200 dark:border-neutral-800 px-4 py-2">
+      <div className="md:hidden border-b border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-950/70 backdrop-blur-sm px-4 py-2">
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -104,7 +103,7 @@ export function ToolNav() {
         />
       )}
       {mobileOpen && (
-        <aside className="md:hidden fixed top-0 left-0 z-50 h-full w-56 border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-4 pl-4 pr-2 overflow-y-auto">
+        <aside className="sidebar-scrollbar md:hidden fixed top-0 left-0 z-50 h-full w-56 border-r border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-950/70 backdrop-blur-sm py-4 pl-4 pr-2 overflow-y-auto">
           <h2 className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
             Tools
           </h2>

@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 function base64UrlDecode(str: string): string {
   let base64 = str.replace(/-/g, "+").replace(/_/g, "/");
@@ -42,8 +43,11 @@ function decodeJwt(token: string): string {
   return JSON.stringify(result, null, 2);
 }
 
+const JWT_DECODER_DEFAULTS = { input: "" };
+
 export function JwtDecoderTool() {
-  const [input, setInput] = useState("");
+  const [s, setS] = useToolSettings("main", JWT_DECODER_DEFAULTS);
+  const { input } = s;
   const [output, setOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -71,7 +75,7 @@ export function JwtDecoderTool() {
         </label>
         <textarea
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => setS((p) => ({ ...p, input: e.target.value }))}
           placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
           rows={4}
           className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm focus:ring-2 focus:ring-neutral-400 outline-none resize-y"

@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 function timestampToDate(input: string): { iso: string; local: string; timezone: string } {
   const trimmed = input.trim();
@@ -28,10 +29,18 @@ function dateToTimestamp(input: string): string {
   return Math.floor(date.getTime() / 1000).toString();
 }
 
+const UNIX_TS_DEFAULTS: {
+  input: string;
+  mode: "toDate" | "toTimestamp";
+} = {
+  input: "",
+  mode: "toDate",
+};
+
 export function UnixTimestampTool() {
-  const [input, setInput] = useState("");
+  const [s, setS] = useToolSettings("main", UNIX_TS_DEFAULTS);
+  const { input, mode } = s;
   const [output, setOutput] = useState("");
-  const [mode, setMode] = useState<"toDate" | "toTimestamp">("toDate");
   const [error, setError] = useState<string | null>(null);
   const [dateDetails, setDateDetails] = useState<{
     iso: string;
@@ -66,7 +75,7 @@ export function UnixTimestampTool() {
     <div className="space-y-4">
       <div className="flex gap-2">
         <button
-          onClick={() => setMode("toDate")}
+          onClick={() => setS((p) => ({ ...p, mode: "toDate" }))}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
             mode === "toDate"
               ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
@@ -76,7 +85,7 @@ export function UnixTimestampTool() {
           Timestamp → Date
         </button>
         <button
-          onClick={() => setMode("toTimestamp")}
+          onClick={() => setS((p) => ({ ...p, mode: "toTimestamp" }))}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
             mode === "toTimestamp"
               ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
@@ -92,7 +101,7 @@ export function UnixTimestampTool() {
         </label>
         <textarea
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => setS((p) => ({ ...p, input: e.target.value }))}
           placeholder={
             mode === "toDate"
               ? "e.g. 1700000000 or 1700000000000"

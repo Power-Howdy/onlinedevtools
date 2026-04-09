@@ -1,6 +1,8 @@
+"use client";
+
 export function Footer() {
   return (
-    <footer className="border-t border-neutral-200 dark:border-neutral-800 mt-auto">
+    <footer className="mt-auto border-t border-neutral-200 bg-white/70 backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-950/70">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div>

@@ -119,7 +119,7 @@ export function RecentToolsPanel() {
       )}
 
       <aside
-        className={`fixed inset-y-0 right-0 z-30 w-72 max-w-[80vw] transform border-l border-neutral-200 bg-white shadow-lg transition-transform dark:border-neutral-800 dark:bg-neutral-950 ${
+        className={`fixed inset-y-0 right-0 z-30 w-72 max-w-[80vw] transform border-l border-neutral-200 bg-white/70 shadow-lg backdrop-blur-sm transition-transform dark:border-neutral-800 dark:bg-neutral-950/70 ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!open}

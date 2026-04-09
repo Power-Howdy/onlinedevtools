@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo } from "react";
 import toast from "react-hot-toast";
+import { useToolSettings } from "@/hooks/useToolSettings";
 import {
   compareJsonStructure,
   countNonEqual,
@@ -26,10 +27,15 @@ function kindClass(kind: JsonDiffKind): string {
   }
 }
 
+const JSON_COMPARE_DEFAULTS = {
+  textLeft: "",
+  textRight: "",
+  showEqual: false,
+};
+
 export function JsonCompareTool() {
-  const [textLeft, setTextLeft] = useState("");
-  const [textRight, setTextRight] = useState("");
-  const [showEqual, setShowEqual] = useState(false);
+  const [s, setS] = useToolSettings("main", JSON_COMPARE_DEFAULTS);
+  const { textLeft, textRight, showEqual } = s;
   const [rows, setRows] = useState<JsonDiffRow[] | null>(null);
 
   const summary = useMemo(() => {
@@ -74,7 +80,7 @@ export function JsonCompareTool() {
           type="checkbox"
           checked={showEqual}
           onChange={(e) => {
-            setShowEqual(e.target.checked);
+            setS((p) => ({ ...p, showEqual: e.target.checked }));
             setRows(null);
           }}
           className="rounded border-neutral-300 dark:border-neutral-600"
@@ -89,7 +95,7 @@ export function JsonCompareTool() {
           <textarea
             value={textLeft}
             onChange={(e) => {
-              setTextLeft(e.target.value);
+              setS((p) => ({ ...p, textLeft: e.target.value }));
               setRows(null);
             }}
             placeholder='{"b":1,"a":2}'
@@ -104,7 +110,7 @@ export function JsonCompareTool() {
           <textarea
             value={textRight}
             onChange={(e) => {
-              setTextRight(e.target.value);
+              setS((p) => ({ ...p, textRight: e.target.value }));
               setRows(null);
             }}
             placeholder='{"a":2,"b":1}'

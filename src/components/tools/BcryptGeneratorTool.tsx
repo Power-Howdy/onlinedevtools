@@ -4,13 +4,23 @@ import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
 import bcrypt from "bcryptjs";
 import { InputOutput } from "@/components/InputOutput";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 const ROUNDS = 10;
 
+const BCRYPT_DEFAULTS: {
+  mode: "hash" | "compare";
+  comparePlain: string;
+  compareHash: string;
+} = {
+  mode: "hash",
+  comparePlain: "",
+  compareHash: "",
+};
+
 export function BcryptGeneratorTool() {
-  const [mode, setMode] = useState<"hash" | "compare">("hash");
-  const [comparePlain, setComparePlain] = useState("");
-  const [compareHash, setCompareHash] = useState("");
+  const [s, setS] = useToolSettings("main", BCRYPT_DEFAULTS);
+  const { mode, comparePlain, compareHash } = s;
   const [compareResult, setCompareResult] = useState<boolean | null>(null);
 
   const handleHash = useCallback((input: string) => {
@@ -45,13 +55,13 @@ export function BcryptGeneratorTool() {
       <div className="space-y-4">
         <div className="flex gap-2">
           <button
-            onClick={() => setMode("hash")}
+            onClick={() => setS((p) => ({ ...p, mode: "hash" }))}
             className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700"
           >
             Hash
           </button>
           <button
-            onClick={() => setMode("compare")}
+            onClick={() => setS((p) => ({ ...p, mode: "compare" }))}
             className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-neutral-900 text-white dark:bg-white dark:bg-neutral-900 dark:text-neutral-900"
           >
             Compare
@@ -64,7 +74,7 @@ export function BcryptGeneratorTool() {
             </label>
             <textarea
               value={comparePlain}
-              onChange={(e) => setComparePlain(e.target.value)}
+              onChange={(e) => setS((p) => ({ ...p, comparePlain: e.target.value }))}
               placeholder="Enter password or text..."
               rows={2}
               className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm"
@@ -77,7 +87,7 @@ export function BcryptGeneratorTool() {
             <textarea
               id="bcrypt-compare-hash"
               value={compareHash}
-              onChange={(e) => setCompareHash(e.target.value)}
+              onChange={(e) => setS((p) => ({ ...p, compareHash: e.target.value }))}
               placeholder="$2a$10$..."
               rows={2}
               className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm"
@@ -109,13 +119,13 @@ export function BcryptGeneratorTool() {
     <div className="space-y-4">
       <div className="flex gap-2">
         <button
-          onClick={() => setMode("hash")}
+          onClick={() => setS((p) => ({ ...p, mode: "hash" }))}
           className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
         >
           Hash
         </button>
         <button
-          onClick={() => setMode("compare")}
+          onClick={() => setS((p) => ({ ...p, mode: "compare" }))}
           className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700"
         >
           Compare

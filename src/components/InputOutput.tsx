@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 import { copyToClipboard as copyText } from "@/lib/clipboard";
 import { useToolSlug } from "@/contexts/ToolAnalyticsContext";
 import { trackEvent } from "@/lib/analytics";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 type InputOutputProps = {
   inputLabel?: string;
@@ -29,17 +30,37 @@ export function InputOutput({
   onDecode,
   readOnly = true,
 }: InputOutputProps) {
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
-  const [mode, setMode] = useState<"encode" | "decode">(
-    inputMode === "both" ? "encode" : inputMode
+  const toolSlug = useToolSlug();
+  const ioDefaults = useMemo(
+    () => ({ input: "", mode: (inputMode === "both" ? "encode" : inputMode) as "encode" | "decode" }),
+    [inputMode]
   );
+  const [io, setIo] = useToolSettings("io", ioDefaults);
+  const input = io.input;
+  const setInput = useCallback(
+    (v: string | ((prev: string) => string)) => {
+      setIo((prev) => ({
+        ...prev,
+        input: typeof v === "function" ? v(prev.input) : v,
+      }));
+    },
+    [setIo]
+  );
+  const mode: "encode" | "decode" = inputMode === "both" ? io.mode : inputMode;
+  const setMode = useCallback(
+    (m: "encode" | "decode") => {
+      if (inputMode !== "both") return;
+      setIo((prev) => ({ ...prev, mode: m }));
+    },
+    [inputMode, setIo]
+  );
+
+  const [output, setOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const outputRef = useRef<HTMLTextAreaElement>(null);
-  const toolSlug = useToolSlug();
 
   const handleTransform = useCallback(async () => {
     setError(null);
@@ -67,7 +88,7 @@ export function InputOutput({
     setInput("");
     setOutput("");
     setError(null);
-  }, []);
+  }, [setInput]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

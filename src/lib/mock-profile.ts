@@ -42,6 +42,12 @@ export type MockProfile = {
   fullName: string;
   email: string;
   phone: string;
+  professionalTitle: string;
+  specialty: string;
+  companyName: string;
+  companyWebsite: string;
+  linkedInUrl: string;
+  biography: string;
   addressLine1: string;
   city: string;
   region: string;
@@ -62,6 +68,42 @@ function randomIndex(max: number): number {
   const arr = new Uint32Array(1);
   crypto.getRandomValues(arr);
   return max <= 0 ? 0 : arr[0]! % max;
+}
+
+/** Lowercase slug from name: NFD strip accents, non-alphanumeric → `-`. */
+function linkedInSlug(firstName: string, lastName: string): string {
+  const combined = `${firstName} ${lastName}`.trim();
+  return combined
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function randomDigits(length: number): string {
+  const arr = new Uint8Array(length);
+  crypto.getRandomValues(arr);
+  let s = "";
+  for (let i = 0; i < length; i++) s += String(arr[i]! % 10);
+  return s;
+}
+
+function randomAlphanumeric(length: number): string {
+  const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+  const arr = new Uint8Array(length);
+  crypto.getRandomValues(arr);
+  let s = "";
+  for (let i = 0; i < length; i++) s += chars[arr[i]! % chars.length]!;
+  return s;
+}
+
+function buildLinkedInUrl(firstName: string, lastName: string): string {
+  const slug = linkedInSlug(firstName, lastName);
+  if (slug) {
+    return `https://www.linkedin.com/in/${slug}-${randomDigits(8)}`;
+  }
+  return `https://www.linkedin.com/in/${randomAlphanumeric(12)}`;
 }
 
 /** Curated ISO 3166-1 alpha-2 → Faker locale (English labels for forms). */
@@ -135,10 +177,23 @@ export function generateMockProfile(options?: {
   const line2 = [city, region, postalCode].filter(Boolean).join(", ");
   const address = [addressLine1, line2, entry.label].join("\n");
 
+  const professionalTitle = f.person.jobTitle();
+  const specialty = f.person.jobArea();
+  const companyName = f.company.name();
+  const companyWebsite = `https://www.${f.internet.domainName()}`;
+  const linkedInUrl = buildLinkedInUrl(firstName, lastName);
+  const biography = f.lorem.sentences(f.number.int({ min: 2, max: 4 }));
+
   return {
     fullName,
     email,
     phone,
+    professionalTitle,
+    specialty,
+    companyName,
+    companyWebsite,
+    linkedInUrl,
+    biography,
     addressLine1,
     city,
     region,

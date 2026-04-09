@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo } from "react";
 import toast from "react-hot-toast";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 function parseToSearchParams(input: string): URLSearchParams {
   const raw = input.trim();
@@ -92,10 +93,15 @@ function statusClass(status: RowStatus): string {
   }
 }
 
+const PARAMS_COMPARE_DEFAULTS = {
+  textA: "",
+  textB: "",
+  showCompare: false,
+};
+
 export function ParamsCompareTool() {
-  const [textA, setTextA] = useState("");
-  const [textB, setTextB] = useState("");
-  const [showCompare, setShowCompare] = useState(false);
+  const [s, setS] = useToolSettings("main", PARAMS_COMPARE_DEFAULTS);
+  const { textA, textB, showCompare } = s;
 
   const paramsA = useMemo(() => parseToSearchParams(textA), [textA]);
   const paramsB = useMemo(() => parseToSearchParams(textB), [textB]);
@@ -122,8 +128,8 @@ export function ParamsCompareTool() {
       toast.error("Paste at least one URL or query string");
       return;
     }
-    setShowCompare(true);
-  }, [textA, textB]);
+    setS((p) => ({ ...p, showCompare: true }));
+  }, [textA, textB, setS]);
 
   return (
     <div className="space-y-6">
@@ -135,8 +141,7 @@ export function ParamsCompareTool() {
           <textarea
             value={textA}
             onChange={(e) => {
-              setTextA(e.target.value);
-              setShowCompare(false);
+              setS((p) => ({ ...p, textA: e.target.value, showCompare: false }));
             }}
             placeholder={"https://example.com?foo=1&bar=2\nor: /search?q=test\nor: foo=1&bar=2"}
             rows={5}
@@ -188,8 +193,7 @@ export function ParamsCompareTool() {
           <textarea
             value={textB}
             onChange={(e) => {
-              setTextB(e.target.value);
-              setShowCompare(false);
+              setS((p) => ({ ...p, textB: e.target.value, showCompare: false }));
             }}
             placeholder={"https://example.com?foo=1&baz=3"}
             rows={5}

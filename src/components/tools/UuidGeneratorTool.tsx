@@ -3,18 +3,22 @@
 import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 function generateUuid(): string {
   return crypto.randomUUID();
 }
 
+const UUID_DEFAULTS = { count: 1 };
+
 export function UuidGeneratorTool() {
   const [uuids, setUuids] = useState<string[]>([]);
-  const [count, setCount] = useState(1);
+  const [s, setS] = useToolSettings("main", UUID_DEFAULTS);
+  const count = s.count;
   const [copied, setCopied] = useState(false);
 
   const handleGenerate = useCallback(() => {
-    const n = Math.min(Math.max(1, count), 100);
+    const n = Math.min(Math.max(1, Number(count) || 1), 100);
     const generated = Array.from({ length: n }, generateUuid);
     setUuids(generated);
   }, [count]);
@@ -45,7 +49,9 @@ export function UuidGeneratorTool() {
             min={1}
             max={100}
             value={count}
-            onChange={(e) => setCount(parseInt(e.target.value, 10) || 1)}
+            onChange={(e) =>
+              setS((p) => ({ ...p, count: parseInt(e.target.value, 10) || 1 }))
+            }
             className="w-20 px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono"
           />
         </div>

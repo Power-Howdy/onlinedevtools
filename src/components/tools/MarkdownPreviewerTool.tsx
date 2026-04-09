@@ -1,12 +1,18 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import toast from "react-hot-toast";
 import ReactMarkdown from "react-markdown";
 import { marked } from "marked";
+import { useToolSettings } from "@/hooks/useToolSettings";
+
+const MARKDOWN_PREVIEW_DEFAULTS = {
+  input: "# Hello\n\nType **Markdown** here.",
+};
 
 export function MarkdownPreviewerTool() {
-  const [input, setInput] = useState("# Hello\n\nType **Markdown** here.");
+  const [s, setS] = useToolSettings("main", MARKDOWN_PREVIEW_DEFAULTS);
+  const { input } = s;
 
   const handleDownload = useCallback(() => {
     if (!input.trim()) {
@@ -34,7 +40,7 @@ export function MarkdownPreviewerTool() {
           </label>
           <textarea
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => setS((p) => ({ ...p, input: e.target.value }))}
             placeholder="# Your Markdown..."
             rows={12}
             className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm focus:ring-2 focus:ring-neutral-400 outline-none resize-y"

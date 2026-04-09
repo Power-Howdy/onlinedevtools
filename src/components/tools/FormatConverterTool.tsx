@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { InputOutput } from "@/components/InputOutput";
+import { useToolSettings } from "@/hooks/useToolSettings";
 import {
   convertFormat,
   type SourceFormat,
@@ -15,9 +16,17 @@ const FORMATS: { value: SourceFormat; label: string }[] = [
   { value: "yaml", label: "YAML" },
 ];
 
+const FORMAT_CONVERTER_DEFAULTS: {
+  sourceFormat: SourceFormat;
+  targetFormat: TargetFormat;
+} = {
+  sourceFormat: "json",
+  targetFormat: "yaml",
+};
+
 export function FormatConverterTool() {
-  const [sourceFormat, setSourceFormat] = useState<SourceFormat>("json");
-  const [targetFormat, setTargetFormat] = useState<TargetFormat>("yaml");
+  const [s, setS] = useToolSettings("main", FORMAT_CONVERTER_DEFAULTS);
+  const { sourceFormat, targetFormat } = s;
 
   const handleTransform = useCallback(
     (input: string) => {
@@ -48,7 +57,9 @@ export function FormatConverterTool() {
           <select
             id="source-format"
             value={sourceFormat}
-            onChange={(e) => setSourceFormat(e.target.value as SourceFormat)}
+            onChange={(e) =>
+              setS((p) => ({ ...p, sourceFormat: e.target.value as SourceFormat }))
+            }
             className="px-3 py-1.5 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 text-sm font-medium focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 focus:border-transparent outline-none"
           >
             {FORMATS.map((f) => (
@@ -69,7 +80,9 @@ export function FormatConverterTool() {
           <select
             id="target-format"
             value={targetFormat}
-            onChange={(e) => setTargetFormat(e.target.value as TargetFormat)}
+            onChange={(e) =>
+              setS((p) => ({ ...p, targetFormat: e.target.value as TargetFormat }))
+            }
             className="px-3 py-1.5 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 text-sm font-medium focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 focus:border-transparent outline-none"
           >
             {FORMATS.map((f) => (

@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -64,12 +65,23 @@ function randomJson(): string {
   return JSON.stringify(root, null, 2);
 }
 
+const RANDOM_DATA_DEFAULTS: {
+  type: "string" | "number" | "uuid" | "hex" | "json";
+  stringLen: number;
+  numberMin: number;
+  numberMax: number;
+  hexLen: number;
+} = {
+  type: "string",
+  stringLen: 16,
+  numberMin: 0,
+  numberMax: 100,
+  hexLen: 32,
+};
+
 export function RandomDataTool() {
-  const [type, setType] = useState<"string" | "number" | "uuid" | "hex" | "json">("string");
-  const [stringLen, setStringLen] = useState(16);
-  const [numberMin, setNumberMin] = useState(0);
-  const [numberMax, setNumberMax] = useState(100);
-  const [hexLen, setHexLen] = useState(32);
+  const [s, setS] = useToolSettings("main", RANDOM_DATA_DEFAULTS);
+  const { type, stringLen, numberMin, numberMax, hexLen } = s;
   const [outputs, setOutputs] = useState<string[]>([]);
   const [copied, setCopied] = useState(false);
 
@@ -79,16 +91,18 @@ export function RandomDataTool() {
     for (let i = 0; i < count; i++) {
       switch (type) {
         case "string":
-          results.push(randomString(stringLen));
+          results.push(randomString(Number(stringLen) || 16));
           break;
         case "number":
-          results.push(String(randomInt(numberMin, numberMax)));
+          results.push(
+            String(randomInt(Number(numberMin) || 0, Number(numberMax) || 100))
+          );
           break;
         case "uuid":
           results.push(crypto.randomUUID());
           break;
         case "hex":
-          results.push(randomHex(Math.ceil(hexLen / 2)));
+          results.push(randomHex(Math.ceil((Number(hexLen) || 32) / 2)));
           break;
         case "json":
           results.push(randomJson());
@@ -118,7 +132,7 @@ export function RandomDataTool() {
         {(["string", "number", "uuid", "hex", "json"] as const).map((t) => (
           <button
             key={t}
-            onClick={() => setType(t)}
+            onClick={() => setS((p) => ({ ...p, type: t }))}
             className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               type === t ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900" : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700"
             }`}
@@ -135,7 +149,12 @@ export function RandomDataTool() {
             min={1}
             max={512}
             value={stringLen}
-            onChange={(e) => setStringLen(Math.max(1, parseInt(e.target.value, 10) || 1))}
+            onChange={(e) =>
+              setS((p) => ({
+                ...p,
+                stringLen: Math.max(1, parseInt(e.target.value, 10) || 1),
+              }))
+            }
             className="w-24 px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900"
           />
         </div>
@@ -147,7 +166,9 @@ export function RandomDataTool() {
             <input
               type="number"
               value={numberMin}
-              onChange={(e) => setNumberMin(parseInt(e.target.value, 10) || 0)}
+              onChange={(e) =>
+                setS((p) => ({ ...p, numberMin: parseInt(e.target.value, 10) || 0 }))
+              }
               className="w-24 px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900"
             />
           </div>
@@ -156,7 +177,9 @@ export function RandomDataTool() {
             <input
               type="number"
               value={numberMax}
-              onChange={(e) => setNumberMax(parseInt(e.target.value, 10) || 100)}
+              onChange={(e) =>
+                setS((p) => ({ ...p, numberMax: parseInt(e.target.value, 10) || 100 }))
+              }
               className="w-24 px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900"
             />
           </div>
@@ -170,7 +193,12 @@ export function RandomDataTool() {
             min={2}
             max={512}
             value={hexLen}
-            onChange={(e) => setHexLen(Math.max(2, parseInt(e.target.value, 10) || 2))}
+            onChange={(e) =>
+              setS((p) => ({
+                ...p,
+                hexLen: Math.max(2, parseInt(e.target.value, 10) || 2),
+              }))
+            }
             className="w-24 px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900"
           />
         </div>

@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 function testRegex(pattern: string, text: string): { matches: string[]; error?: string } {
   if (!pattern.trim()) return { matches: [] };
@@ -14,9 +15,11 @@ function testRegex(pattern: string, text: string): { matches: string[]; error?: 
   }
 }
 
+const REGEX_TESTER_DEFAULTS = { pattern: "", text: "" };
+
 export function RegexTesterTool() {
-  const [pattern, setPattern] = useState("");
-  const [text, setText] = useState("");
+  const [s, setS] = useToolSettings("main", REGEX_TESTER_DEFAULTS);
+  const { pattern, text } = s;
   const [result, setResult] = useState<{ matches: string[]; error?: string } | null>(null);
 
   const handleTest = useCallback(() => {
@@ -40,7 +43,7 @@ export function RegexTesterTool() {
         <input
           type="text"
           value={pattern}
-          onChange={(e) => setPattern(e.target.value)}
+          onChange={(e) => setS((p) => ({ ...p, pattern: e.target.value }))}
           placeholder="e.g. \w+@\w+\.\w+"
           className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm focus:ring-2 focus:ring-neutral-400 outline-none"
         />
@@ -51,7 +54,7 @@ export function RegexTesterTool() {
         </label>
         <textarea
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => setS((p) => ({ ...p, text: e.target.value }))}
           placeholder="Enter text to test against..."
           rows={6}
           className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm focus:ring-2 focus:ring-neutral-400 outline-none resize-y"

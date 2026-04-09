@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
@@ -31,12 +32,17 @@ function generatePassword(
   return result;
 }
 
+const PASSWORD_DEFAULTS = {
+  length: 16,
+  uppercase: true,
+  lowercase: true,
+  numbers: true,
+  symbols: true,
+};
+
 export function PasswordGeneratorTool() {
-  const [length, setLength] = useState(16);
-  const [uppercase, setUppercase] = useState(true);
-  const [lowercase, setLowercase] = useState(true);
-  const [numbers, setNumbers] = useState(true);
-  const [symbols, setSymbols] = useState(true);
+  const [s, setS] = useToolSettings("main", PASSWORD_DEFAULTS);
+  const { length, uppercase, lowercase, numbers, symbols } = s;
   const [password, setPassword] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -73,7 +79,9 @@ export function PasswordGeneratorTool() {
             min={8}
             max={64}
             value={length}
-            onChange={(e) => setLength(parseInt(e.target.value, 10) || 16)}
+            onChange={(e) =>
+              setS((p) => ({ ...p, length: parseInt(e.target.value, 10) || 16 }))
+            }
             className="w-20 px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono"
           />
         </div>
@@ -86,7 +94,7 @@ export function PasswordGeneratorTool() {
               <input
                 type="checkbox"
                 checked={uppercase}
-                onChange={(e) => setUppercase(e.target.checked)}
+                onChange={(e) => setS((p) => ({ ...p, uppercase: e.target.checked }))}
                 className="rounded border-neutral-300"
               />
               <span className="text-sm">Uppercase</span>
@@ -95,7 +103,7 @@ export function PasswordGeneratorTool() {
               <input
                 type="checkbox"
                 checked={lowercase}
-                onChange={(e) => setLowercase(e.target.checked)}
+                onChange={(e) => setS((p) => ({ ...p, lowercase: e.target.checked }))}
                 className="rounded border-neutral-300"
               />
               <span className="text-sm">Lowercase</span>
@@ -104,7 +112,7 @@ export function PasswordGeneratorTool() {
               <input
                 type="checkbox"
                 checked={numbers}
-                onChange={(e) => setNumbers(e.target.checked)}
+                onChange={(e) => setS((p) => ({ ...p, numbers: e.target.checked }))}
                 className="rounded border-neutral-300"
               />
               <span className="text-sm">Numbers</span>
@@ -113,7 +121,7 @@ export function PasswordGeneratorTool() {
               <input
                 type="checkbox"
                 checked={symbols}
-                onChange={(e) => setSymbols(e.target.checked)}
+                onChange={(e) => setS((p) => ({ ...p, symbols: e.target.checked }))}
                 className="rounded border-neutral-300"
               />
               <span className="text-sm">Symbols</span>

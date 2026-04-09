@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 
-import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/Toaster";
 import { JsonLd } from "@/components/JsonLd";
 // import { Analytics } from "@/components/Analytics";
@@ -83,8 +82,7 @@ export default function RootLayout({
         <JsonLd />
         <Analytics />
         <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <main className="flex flex-1 flex-col min-h-0 w-full pt-[var(--header-height)]">{children}</main>
         <Toaster />
       </body>
     </html>

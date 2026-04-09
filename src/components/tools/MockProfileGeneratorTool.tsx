@@ -3,11 +3,47 @@
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
+import { useToolSettings } from "@/hooks/useToolSettings";
 import {
   generateMockProfile,
   MOCK_PROFILE_COUNTRIES,
   type MockProfile,
 } from "@/lib/mock-profile";
+
+function BiographyBlock({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = useCallback(async () => {
+    const ok = await copyToClipboard(value);
+    if (ok) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } else {
+      toast.error("Copy failed. Try selecting and copying manually.");
+    }
+  }, [value]);
+  return (
+    <div className="min-w-0 sm:col-span-2">
+      <div className="flex items-center justify-between gap-2 mb-1">
+        <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+          Biography
+        </span>
+        <button
+          type="button"
+          onClick={copy}
+          className="shrink-0 px-3 py-1.5 text-sm font-medium rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+        >
+          {copied ? "Copied" : "Copy"}
+        </button>
+      </div>
+      <textarea
+        readOnly
+        value={value}
+        rows={5}
+        className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-900/50 text-sm text-neutral-900 dark:text-neutral-100 leading-relaxed resize-y"
+      />
+    </div>
+  );
+}
 
 function AddressBlock({ value }: { value: string }) {
   const [copied, setCopied] = useState(false);
@@ -21,7 +57,7 @@ function AddressBlock({ value }: { value: string }) {
     }
   }, [value]);
   return (
-    <div>
+    <div className="min-w-0 sm:col-span-2">
       <div className="flex items-center justify-between gap-2 mb-1">
         <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
           Full address (multiline)
@@ -44,7 +80,8 @@ function AddressBlock({ value }: { value: string }) {
   );
 }
 
-function FieldRow({
+/** Stacked label + value + copy for two-column grid cells. */
+function GridField({
   label,
   value,
   monospace,
@@ -70,14 +107,14 @@ function FieldRow({
   }, [value]);
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3">
-      <div className="sm:w-36 shrink-0 text-sm font-medium text-neutral-600 dark:text-neutral-400 pt-2">
+    <div className="min-w-0">
+      <div className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-1">
         {label}
       </div>
-      <div className="flex flex-1 gap-2 min-w-0">
+      <div className="flex gap-2 min-w-0">
         <div
-          className={`flex-1 px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-900/50 text-sm text-neutral-900 dark:text-neutral-100 break-words ${
-            monospace ? "font-mono" : ""
+          className={`flex-1 px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-900/50 text-neutral-900 dark:text-neutral-100 break-words ${
+            monospace ? "font-mono text-xs sm:text-sm" : "text-sm"
           }`}
         >
           {value || "—"}
@@ -86,7 +123,7 @@ function FieldRow({
           type="button"
           onClick={copy}
           disabled={!value}
-          className="shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 disabled:opacity-40 disabled:pointer-events-none"
+          className="shrink-0 self-start px-3 py-2 text-sm font-medium rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 disabled:opacity-40 disabled:pointer-events-none"
         >
           {copied ? "Copied" : "Copy"}
         </button>
@@ -95,8 +132,11 @@ function FieldRow({
   );
 }
 
+const MOCK_PROFILE_DEFAULTS = { countryCode: "" };
+
 export function MockProfileGeneratorTool() {
-  const [countryCode, setCountryCode] = useState("");
+  const [s, setS] = useToolSettings("main", MOCK_PROFILE_DEFAULTS);
+  const { countryCode } = s;
   const [profile, setProfile] = useState<MockProfile | null>(null);
   const [jsonCopied, setJsonCopied] = useState(false);
 
@@ -145,7 +185,7 @@ export function MockProfileGeneratorTool() {
           <select
             id="mock-profile-country"
             value={countryCode}
-            onChange={(e) => setCountryCode(e.target.value)}
+            onChange={(e) => setS((p) => ({ ...p, countryCode: e.target.value }))}
             className="w-full max-w-md px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-sm"
           >
             <option value="">Random (any supported country)</option>
@@ -175,16 +215,24 @@ export function MockProfileGeneratorTool() {
       </div>
 
       {profile && (
-        <div className="space-y-3 pt-2">
-          <FieldRow label="Full name" value={profile.fullName} />
-          <FieldRow label="Email" value={profile.email.toLowerCase()} monospace />
-          <FieldRow label="Phone" value={profile.phone} monospace />
-          <FieldRow label="Address line 1" value={profile.addressLine1} />
-          <FieldRow label="City" value={profile.city} />
-          <FieldRow label="Region / state" value={profile.region} />
-          <FieldRow label="Postal code" value={profile.postalCode} monospace />
-          <FieldRow label="Country" value={profile.countryName} />
-          <FieldRow label="Country code" value={profile.countryCode} monospace />
+        <div className="grid gap-4 sm:grid-cols-2 pt-2">
+          <div className="sm:col-span-2">
+            <GridField label="Full name" value={profile.fullName} />
+          </div>
+          <GridField label="Email" value={profile.email.toLowerCase()} monospace />
+          <GridField label="Phone" value={profile.phone} monospace />
+          <GridField label="Professional title" value={profile.professionalTitle} />
+          <GridField label="Specialty / focus" value={profile.specialty} />
+          <GridField label="Company" value={profile.companyName} />
+          <GridField label="Company website" value={profile.companyWebsite} monospace />
+          <GridField label="LinkedIn URL" value={profile.linkedInUrl} monospace />
+          <GridField label="Address line 1" value={profile.addressLine1} />
+          <GridField label="City" value={profile.city} />
+          <GridField label="Region / state" value={profile.region} />
+          <GridField label="Postal code" value={profile.postalCode} monospace />
+          <GridField label="Country" value={profile.countryName} />
+          <GridField label="Country code" value={profile.countryCode} monospace />
+          <BiographyBlock value={profile.biography} />
           <AddressBlock value={profile.address} />
         </div>
       )}

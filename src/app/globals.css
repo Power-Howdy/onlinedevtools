@@ -10,26 +10,65 @@
   --card: #ffffff;
   --card-border: #e5e5e5;
   --muted: #737373;
+  --scrollbar-sidebar-size: 5px;
+  --scrollbar-sidebar-track: rgba(0, 0, 0, 0.06);
+  --scrollbar-sidebar-thumb: rgba(0, 0, 0, 0.22);
+  --scrollbar-sidebar-thumb-hover: rgba(0, 0, 0, 0.38);
 }
 
 .dark {
-  --foreground: #ededed;
-  --background: #0a0a0a;
-  --card: #171717;
-  --card-border: #262626;
+  --foreground: #edededd4;
+  --background: #0a0a0ae7;
+  --card: #171717c0;
+  --card-border: #262626c5;
   --muted: #a3a3a3;
+  --scrollbar-sidebar-track: rgba(255, 255, 255, 0.06);
+  --scrollbar-sidebar-thumb: rgba(255, 255, 255, 0.22);
+  --scrollbar-sidebar-thumb-hover: rgba(255, 255, 255, 0.4);
+}
+
+html {
+  min-height: 100%;
 }
 
 body {
+  min-height: 100dvh;
   color: var(--foreground);
   background-color: var(--background);
-  background-image:
-    radial-gradient(circle at 1px 1px, var(--card-border) 1px, transparent 0);
-  background-size: 24px 24px;
-  background-position: 0 0;
+  background-image: url("/assets/bg_light.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }
 
 html.dark body {
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(229, 211, 211, 0.281) 1px, transparent 0);
+  background-image: url("/assets/bg-dark.png");
+}
+
+@layer utilities {
+  .sidebar-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-sidebar-thumb) var(--scrollbar-sidebar-track);
+  }
+
+  .sidebar-scrollbar::-webkit-scrollbar {
+    width: var(--scrollbar-sidebar-size);
+    height: var(--scrollbar-sidebar-size);
+  }
+
+  .sidebar-scrollbar::-webkit-scrollbar-track {
+    margin: 4px 0;
+    background: var(--scrollbar-sidebar-track);
+    border-radius: 9999px;
+  }
+
+  .sidebar-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-sidebar-thumb);
+    border-radius: 9999px;
+  }
+
+  .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-sidebar-thumb-hover);
+  }
 }

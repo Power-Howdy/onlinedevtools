@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
+import { useToolSettings } from "@/hooks/useToolSettings";
 import {
   DEFAULT_CHAR_TARGET,
   DEFAULT_PARAGRAPH_COUNT,
@@ -15,12 +16,17 @@ import {
   type TextLocaleId,
 } from "@/lib/locale-text-generator";
 
+const LOCALE_TEXT_DEFAULTS = {
+  localeId: "en" as TextLocaleId,
+  paragraphCount: DEFAULT_PARAGRAPH_COUNT,
+  charTarget: DEFAULT_CHAR_TARGET,
+  randomParagraphs: false,
+  randomChars: false,
+};
+
 export function LocaleTextGeneratorTool() {
-  const [localeId, setLocaleId] = useState<TextLocaleId>("en");
-  const [paragraphCount, setParagraphCount] = useState(DEFAULT_PARAGRAPH_COUNT);
-  const [charTarget, setCharTarget] = useState(DEFAULT_CHAR_TARGET);
-  const [randomParagraphs, setRandomParagraphs] = useState(false);
-  const [randomChars, setRandomChars] = useState(false);
+  const [s, setS] = useToolSettings("main", LOCALE_TEXT_DEFAULTS);
+  const { localeId, paragraphCount, charTarget, randomParagraphs, randomChars } = s;
   const [output, setOutput] = useState("");
   const [meta, setMeta] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -76,7 +82,9 @@ export function LocaleTextGeneratorTool() {
           <select
             id="locale-text-lang"
             value={localeId}
-            onChange={(e) => setLocaleId(e.target.value as TextLocaleId)}
+            onChange={(e) =>
+              setS((p) => ({ ...p, localeId: e.target.value as TextLocaleId }))
+            }
             className="w-full max-w-md px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-sm"
           >
             {TEXT_LOCALES.map((l) => (
@@ -99,7 +107,9 @@ export function LocaleTextGeneratorTool() {
               <input
                 type="checkbox"
                 checked={randomParagraphs}
-                onChange={(e) => setRandomParagraphs(e.target.checked)}
+                onChange={(e) =>
+                  setS((p) => ({ ...p, randomParagraphs: e.target.checked }))
+                }
                 className="rounded border-neutral-300"
               />
               Random ({RANDOM_PARAGRAPH_MIN}–{RANDOM_PARAGRAPH_MAX})
@@ -113,7 +123,13 @@ export function LocaleTextGeneratorTool() {
             disabled={randomParagraphs}
             value={paragraphCount}
             onChange={(e) =>
-              setParagraphCount(Math.max(1, Math.min(40, parseInt(e.target.value, 10) || 1)))
+              setS((p) => ({
+                ...p,
+                paragraphCount: Math.max(
+                  1,
+                  Math.min(40, parseInt(e.target.value, 10) || 1)
+                ),
+              }))
             }
             className="w-full max-w-xs px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 disabled:opacity-50"
           />
@@ -131,7 +147,9 @@ export function LocaleTextGeneratorTool() {
               <input
                 type="checkbox"
                 checked={randomChars}
-                onChange={(e) => setRandomChars(e.target.checked)}
+                onChange={(e) =>
+                  setS((p) => ({ ...p, randomChars: e.target.checked }))
+                }
                 className="rounded border-neutral-300"
               />
               Random ({RANDOM_CHAR_MIN}–{RANDOM_CHAR_MAX})
@@ -145,9 +163,16 @@ export function LocaleTextGeneratorTool() {
             disabled={randomChars}
             value={charTarget}
             onChange={(e) =>
-              setCharTarget(
-                Math.max(20, Math.min(20000, parseInt(e.target.value, 10) || DEFAULT_CHAR_TARGET))
-              )
+              setS((p) => ({
+                ...p,
+                charTarget: Math.max(
+                  20,
+                  Math.min(
+                    20000,
+                    parseInt(e.target.value, 10) || DEFAULT_CHAR_TARGET
+                  )
+                ),
+              }))
             }
             className="w-full max-w-xs px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 disabled:opacity-50"
           />

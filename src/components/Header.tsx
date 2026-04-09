@@ -4,8 +4,8 @@ import { ToolSearch } from "./ToolSearch";
 
 export function Header() {
   return (
-    <header className="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-2">
+    <header className="fixed top-0 left-0 right-0 z-20 border-b border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-950/70 backdrop-blur-sm">
+      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-2 w-full">
         <Link
           href="/"
           className="flex items-center gap-2 text-xl font-semibold text-neutral-900 dark:text-neutral-100 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors shrink-0"

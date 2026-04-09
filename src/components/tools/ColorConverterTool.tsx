@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 function hexToRgb(hex: string): { r: number; g: number; b: number; a?: number } | null {
   const raw = hex.replace(/^#/, "").trim();
@@ -154,8 +155,11 @@ function parseHsla(input: string): { h: number; s: number; l: number; a: number 
   return { h, s, l, a: a * 100 };
 }
 
+const COLOR_CONVERTER_DEFAULTS = { input: "" };
+
 export function ColorConverterTool() {
-  const [input, setInput] = useState("");
+  const [s, setS] = useToolSettings("main", COLOR_CONVERTER_DEFAULTS);
+  const { input } = s;
   const [output, setOutput] = useState<{ hex: string; rgb: string; rgba?: string; hsl: string; hsla?: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -233,7 +237,7 @@ export function ColorConverterTool() {
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => setS((p) => ({ ...p, input: e.target.value }))}
           placeholder="#fff, #ffffff03, rgb(255,102,0), rgba(255,102,0,0.5), hsl(24,100%,50%)"
           className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm"
         />

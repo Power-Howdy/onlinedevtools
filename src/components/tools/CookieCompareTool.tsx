@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo } from "react";
 import toast from "react-hot-toast";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 type CookieEntry = { name: string; value: string };
 
@@ -110,10 +111,15 @@ function statusClass(status: RowStatus): string {
   }
 }
 
+const COOKIE_COMPARE_DEFAULTS = {
+  textA: "",
+  textB: "",
+  showCompare: false,
+};
+
 export function CookieCompareTool() {
-  const [textA, setTextA] = useState("");
-  const [textB, setTextB] = useState("");
-  const [showCompare, setShowCompare] = useState(false);
+  const [s, setS] = useToolSettings("main", COOKIE_COMPARE_DEFAULTS);
+  const { textA, textB, showCompare } = s;
 
   const parseA = useMemo(() => parseCookieHeader(textA), [textA]);
   const parseB = useMemo(() => parseCookieHeader(textB), [textB]);
@@ -131,8 +137,8 @@ export function CookieCompareTool() {
       toast.error("Paste at least one cookie header to compare");
       return;
     }
-    setShowCompare(true);
-  }, [textA, textB]);
+    setS((p) => ({ ...p, showCompare: true }));
+  }, [textA, textB, setS]);
 
   return (
     <div className="space-y-6">
@@ -144,8 +150,7 @@ export function CookieCompareTool() {
           <textarea
             value={textA}
             onChange={(e) => {
-              setTextA(e.target.value);
-              setShowCompare(false);
+              setS((p) => ({ ...p, textA: e.target.value, showCompare: false }));
             }}
             placeholder={'session=abc; user_id=1\nor: Cookie: session=abc'}
             rows={6}
@@ -206,8 +211,7 @@ export function CookieCompareTool() {
           <textarea
             value={textB}
             onChange={(e) => {
-              setTextB(e.target.value);
-              setShowCompare(false);
+              setS((p) => ({ ...p, textB: e.target.value, showCompare: false }));
             }}
             placeholder={'session=xyz; theme=dark'}
             rows={6}

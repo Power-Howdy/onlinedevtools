@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { InputOutput } from "@/components/InputOutput";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 function parseJson(input: string): unknown {
   const trimmed = input.trim();
@@ -31,8 +32,13 @@ function jsonToTypeScript(obj: unknown, name = "Root"): string {
   return "unknown";
 }
 
+const JSON_FORMATTER_DEFAULTS: { mode: "format" | "typescript" } = {
+  mode: "format",
+};
+
 export function JsonFormatterTool() {
-  const [mode, setMode] = useState<"format" | "typescript">("format");
+  const [s, setS] = useToolSettings("main", JSON_FORMATTER_DEFAULTS);
+  const mode = s.mode;
 
   const handleTransform = useCallback(
     (input: string) => {
@@ -50,7 +56,7 @@ export function JsonFormatterTool() {
     <div className="space-y-4">
       <div className="flex gap-2">
         <button
-          onClick={() => setMode("format")}
+          onClick={() => setS((p) => ({ ...p, mode: "format" }))}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
             mode === "format"
               ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
@@ -60,7 +66,7 @@ export function JsonFormatterTool() {
           Format
         </button>
         <button
-          onClick={() => setMode("typescript")}
+          onClick={() => setS((p) => ({ ...p, mode: "typescript" }))}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
             mode === "typescript"
               ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"

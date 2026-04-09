@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { Footer } from "@/components/Footer";
 
 export default function NotFound() {
   return (
-    <div className="max-w-2xl mx-auto px-4 py-16 text-center">
+    <div className="flex flex-1 flex-col min-h-0 w-full">
+    <div className="flex-1 max-w-2xl mx-auto w-full px-4 py-16 text-center">
       <h1 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
         404
       </h1>
@@ -23,6 +25,8 @@ export default function NotFound() {
           JSON Formatter
         </Link>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 }

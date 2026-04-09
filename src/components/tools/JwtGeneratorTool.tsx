@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 function base64UrlEncode(str: string): string {
   const bytes = new TextEncoder().encode(str);
@@ -59,9 +60,14 @@ async function generateJwt(
 const DEFAULT_HEADER = '{"alg":"HS256","typ":"JWT"}';
 const DEFAULT_PAYLOAD = '{"sub":"user123","name":"John Doe","iat":1731456000}';
 
+const JWT_GEN_DEFAULTS = {
+  header: DEFAULT_HEADER,
+  payload: DEFAULT_PAYLOAD,
+};
+
 export function JwtGeneratorTool() {
-  const [header, setHeader] = useState(DEFAULT_HEADER);
-  const [payload, setPayload] = useState(DEFAULT_PAYLOAD);
+  const [s, setS] = useToolSettings("main", JWT_GEN_DEFAULTS);
+  const { header, payload } = s;
   const [secret, setSecret] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -87,7 +93,7 @@ export function JwtGeneratorTool() {
         </label>
         <textarea
           value={header}
-          onChange={(e) => setHeader(e.target.value)}
+          onChange={(e) => setS((p) => ({ ...p, header: e.target.value }))}
           placeholder={DEFAULT_HEADER}
           rows={3}
           className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm focus:ring-2 focus:ring-neutral-400 outline-none resize-y"
@@ -99,7 +105,7 @@ export function JwtGeneratorTool() {
         </label>
         <textarea
           value={payload}
-          onChange={(e) => setPayload(e.target.value)}
+          onChange={(e) => setS((p) => ({ ...p, payload: e.target.value }))}
           placeholder={DEFAULT_PAYLOAD}
           rows={4}
           className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm focus:ring-2 focus:ring-neutral-400 outline-none resize-y"

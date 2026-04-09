@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useToolSettings } from "@/hooks/useToolSettings";
 
 type OgMeta = {
   title?: string;
@@ -22,8 +23,11 @@ type OgResponse =
       error: string;
     };
 
+const OG_DEFAULTS = { url: "" };
+
 export function OpenGraphViewerTool() {
-  const [url, setUrl] = useState("");
+  const [s, setS] = useToolSettings("main", OG_DEFAULTS);
+  const { url } = s;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<OgMeta | null>(null);
@@ -83,7 +87,7 @@ export function OpenGraphViewerTool() {
           <input
             type="url"
             value={url}
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={(e) => setS((p) => ({ ...p, url: e.target.value }))}
             placeholder="https://example.com"
             className="mt-1 w-full rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-neutral-200"
           />
@@ -100,7 +104,10 @@ export function OpenGraphViewerTool() {
             type="button"
             disabled={loading}
             onClick={() =>
-              setUrl("https://vercel.com/docs/workflow-collaboration/vercel-toolbar")
+              setS((p) => ({
+                ...p,
+                url: "https://vercel.com/docs/workflow-collaboration/vercel-toolbar",
+              }))
             }
             className="inline-flex items-center justify-center rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-3 py-2 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 disabled:opacity-60 disabled:cursor-not-allowed"
           >

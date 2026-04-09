@@ -417,6 +417,47 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
+    slug: "mock-profile-generator",
+    title: "Mock Profile Generator",
+    description:
+      "Generate fake full name, email, phone, and address for test accounts. Pick a country or use random supported locales.",
+    category: "Generators",
+    seoTitle: "Free Mock Profile Generator – Fake Test User Data",
+    seoDescription:
+      "Generate synthetic profile data for development: name, email, phone, address. Choose a country or random locale. For testing only.",
+    keywords: [
+      "mock profile",
+      "fake user generator",
+      "test data generator",
+      "dummy profile",
+      "signup test data",
+      "fake address generator",
+      "fake phone number",
+      "developer tools",
+    ],
+  },
+  {
+    slug: "multilingual-text-generator",
+    title: "Multilingual Text Generator",
+    description:
+      "Placeholder bios and summaries in English, Chinese, Japanese, Spanish, Italian, and more. Set paragraphs and character length, or use random values.",
+    category: "Generators",
+    seoTitle: "Free Multilingual Placeholder Text Generator Online",
+    seoDescription:
+      "Generate mock biography and summary text in multiple languages. Configure paragraph count and character target, or randomize. For UI and content testing.",
+    keywords: [
+      "lorem ipsum generator",
+      "placeholder text",
+      "multilingual lorem",
+      "english placeholder text",
+      "fake biography generator",
+      "dummy text generator",
+      "chinese placeholder text",
+      "japanese lorem",
+      "developer tools",
+    ],
+  },
+  {
     slug: "unix-timestamp",
     title: "Unix Timestamp Converter",
     description: "Convert Unix timestamp to human date and vice versa. Timezone support.",

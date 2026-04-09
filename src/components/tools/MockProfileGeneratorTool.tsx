@@ -177,7 +177,7 @@ export function MockProfileGeneratorTool() {
       {profile && (
         <div className="space-y-3 pt-2">
           <FieldRow label="Full name" value={profile.fullName} />
-          <FieldRow label="Email" value={profile.email} monospace />
+          <FieldRow label="Email" value={profile.email.toLowerCase()} monospace />
           <FieldRow label="Phone" value={profile.phone} monospace />
           <FieldRow label="Address line 1" value={profile.addressLine1} />
           <FieldRow label="City" value={profile.city} />

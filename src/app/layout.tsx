@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fira_Code, Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
+import { AppShell } from "@/components/AppShell";
 
 import { Toaster } from "@/components/Toaster";
 import { JsonLd } from "@/components/JsonLd";
@@ -9,6 +9,10 @@ import { JsonLd } from "@/components/JsonLd";
 import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools-three.vercel.app";
 
@@ -72,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col`}
+        className={`${inter.variable} ${firaCode.variable} font-sans antialiased min-h-screen flex flex-col`}
       >
         <script
           dangerouslySetInnerHTML={{
@@ -81,8 +85,7 @@ export default function RootLayout({
         />
         <JsonLd />
         <Analytics />
-        <Header />
-        <main className="flex flex-1 flex-col min-h-0 w-full pt-[var(--header-height)]">{children}</main>
+        <AppShell>{children}</AppShell>
         <Toaster />
       </body>
     </html>

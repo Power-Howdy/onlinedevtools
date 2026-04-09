@@ -70,6 +70,7 @@ export function RecentToolsPanel() {
   const hasItems = favorites.length > 0 || recent.length > 0;
 
   const toggle = () => setOpen((prev) => !prev);
+  const close = () => setOpen(false);
 
   const handleClear = () => {
     clearRecentTools();
@@ -85,7 +86,7 @@ export function RecentToolsPanel() {
           type="button"
           aria-label="Show recent tools"
           onClick={toggle}
-          className="fixed right-2 top-1/2 z-40 -translate-y-1/2 rounded-full bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 p-2 shadow-lg flex items-center justify-center md:right-0"
+          className="fixed right-2 top-1/2 z-40 -translate-y-1/2 rounded-full border border-light-border bg-light-card p-2 text-primary shadow-lg flex items-center justify-center md:right-0 dark:border-dark-border dark:bg-dark-card"
         >
           <svg
             className="h-4 w-4"
@@ -118,26 +119,33 @@ export function RecentToolsPanel() {
         </button>
       )}
 
+      {open && (
+        <button
+          type="button"
+          aria-label="Close recent tools panel"
+          className="fixed inset-0 z-[25] bg-black/40 dark:bg-black/50"
+          onClick={close}
+        />
+      )}
+
       <aside
-        className={`fixed inset-y-0 right-0 z-30 w-72 max-w-[80vw] transform border-l border-neutral-200 bg-white/70 shadow-lg backdrop-blur-sm transition-transform dark:border-neutral-800 dark:bg-neutral-950/70 ${
+        className={`fixed inset-y-0 right-0 z-30 w-72 max-w-[80vw] transform border-l border-light-border bg-light-card/95 shadow-lg backdrop-blur-sm transition-transform dark:border-dark-border dark:bg-dark-card/95 ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!open}
       >
         <div className="flex h-full flex-col">
-          <header className="flex items-center justify-between border-b border-neutral-200 px-4 py-3 dark:border-neutral-800">
+          <header className="flex items-center justify-between border-b border-light-border px-4 py-3 dark:border-dark-border">
             <div className="space-y-0.5">
-              <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">
-                Recent tools
-              </h2>
-              <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
+              <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-50">Recent tools</h2>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 Your recently used tools across this session.
               </p>
             </div>
             <button
               type="button"
-              onClick={toggle}
-              className="rounded-md p-1 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
+              onClick={close}
+              className="rounded-md p-1 text-slate-500 hover:bg-slate-100 hover:text-primary dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-primary"
             >
               <span className="sr-only">Close</span>
               <svg
@@ -157,12 +165,12 @@ export function RecentToolsPanel() {
             </button>
           </header>
 
-          <div className="flex-1 overflow-y-auto px-3 py-3 space-y-4">
+          <div className="flex-1 overflow-y-auto px-3 py-3 space-y-4 sidebar-scrollbar">
             {hasItems ? (
               <>
                 {favorites.length > 0 && (
                   <section>
-                    <h3 className="px-1 mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                    <h3 className="px-1 mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       Favorites
                     </h3>
                     <nav className="space-y-0.5">
@@ -188,7 +196,7 @@ export function RecentToolsPanel() {
 
                 {recent.length > 0 && (
                   <section>
-                    <h3 className="px-1 mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                    <h3 className="px-1 mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       Recent
                     </h3>
                     <nav className="space-y-0.5">
@@ -213,18 +221,18 @@ export function RecentToolsPanel() {
                 )}
               </>
             ) : (
-              <div className="mt-6 rounded-lg border border-dashed border-neutral-200 px-3 py-4 text-center text-xs text-neutral-500 dark:border-neutral-800 dark:text-neutral-400">
+              <div className="mt-6 rounded-lg border border-dashed border-light-border px-3 py-4 text-center text-xs text-slate-500 dark:border-dark-border dark:text-slate-400">
                 Use any tool and it will appear here for quick access.
               </div>
             )}
           </div>
 
-          <footer className="border-t border-neutral-200 px-3 py-2.5 text-right text-[11px] dark:border-neutral-800">
+          <footer className="border-t border-light-border px-3 py-2.5 text-right text-[11px] dark:border-dark-border">
             <button
               type="button"
               onClick={handleClear}
               disabled={!hasItems}
-              className="rounded-md px-2 py-1 text-[11px] font-medium text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 disabled:opacity-40 disabled:hover:bg-transparent dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
+              className="rounded-md px-2 py-1 text-[11px] font-medium text-slate-500 hover:bg-slate-100 hover:text-primary disabled:opacity-40 disabled:hover:bg-transparent dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-primary"
             >
               Clear history
             </button>
@@ -254,8 +262,8 @@ function ToolRow({ tool, slug, href, active, favorite }: ToolRowProps) {
       href={href}
       className={`group flex items-center justify-between rounded-md px-2 py-1.5 text-xs transition-colors ${
         active
-          ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
-          : "bg-transparent text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-900"
+          ? "bg-primary/15 text-primary dark:bg-primary/20"
+          : "bg-transparent text-slate-700 hover:bg-slate-100 hover:text-primary dark:text-slate-300 dark:hover:bg-slate-800/80 dark:hover:text-primary"
       }`}
     >
       <span className="truncate">{tool}</span>
@@ -263,7 +271,7 @@ function ToolRow({ tool, slug, href, active, favorite }: ToolRowProps) {
         type="button"
         onClick={handleToggleFavorite}
         aria-label={favorite ? "Unpin from favorites" : "Pin to favorites"}
-        className="ml-2 rounded p-1 text-neutral-400 hover:text-neutral-700 group-hover:text-neutral-700 dark:text-neutral-500 dark:hover:text-neutral-200"
+        className="ml-2 rounded p-1 text-slate-400 hover:text-primary group-hover:text-primary dark:text-slate-500"
       >
         <svg
           className="h-3.5 w-3.5"
@@ -283,4 +291,3 @@ function ToolRow({ tool, slug, href, active, favorite }: ToolRowProps) {
     </Link>
   );
 }
-

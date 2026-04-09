@@ -3,20 +3,17 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { TOOLS, type Tool } from "@/lib/tools";
+import { toolMatches } from "@/lib/tool-matches";
+import { TOOLS } from "@/lib/tools";
 
-function toolMatches(tool: Tool, query: string): boolean {
-  const n = query.trim().toLowerCase();
-  if (!n) return true;
-  return (
-    tool.title.toLowerCase().includes(n) ||
-    tool.description.toLowerCase().includes(n) ||
-    tool.slug.toLowerCase().includes(n) ||
-    tool.keywords.some((k) => k.toLowerCase().includes(n))
-  );
-}
+export type ToolSearchProps = {
+  /** Wrapper width / flex; omit for full-width bar between logo and actions */
+  className?: string;
+  /** Align results under the field (use `right` when the field sits on the right of the header) */
+  dropdownAlign?: "left" | "right";
+};
 
-export function ToolSearch() {
+export function ToolSearch({ className, dropdownAlign = "left" }: ToolSearchProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [query, setQuery] = useState("");
@@ -106,8 +103,12 @@ export function ToolSearch() {
     return () => el.removeEventListener("focusout", onFocusOut);
   }, [open]);
 
+  const wrapClass =
+    className ??
+    "relative flex-1 max-w-md min-w-0 mx-2 md:mx-6";
+
   return (
-    <div ref={wrapRef} className="relative flex-1 max-w-md min-w-0 mx-2 md:mx-6">
+    <div ref={wrapRef} className={wrapClass}>
       {open && (
         <button
           type="button"
@@ -134,10 +135,10 @@ export function ToolSearch() {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setOpen(true)}
           onKeyDown={onInputKeyDown}
-          className="w-full px-3 py-2 pl-9 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-900 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 focus:ring-2 focus:ring-neutral-400 outline-none"
+          className="w-full px-3 py-2 pl-9 rounded-lg border border-light-border bg-light-bg text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none dark:border-dark-border dark:bg-dark-bg dark:text-slate-100 dark:placeholder:text-slate-500"
         />
         <span
-          className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-400"
+          className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-primary/60"
           aria-hidden
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,10 +155,14 @@ export function ToolSearch() {
             role="dialog"
             aria-modal="true"
             aria-label="Tool search results"
-            className="absolute left-0 right-0 top-full mt-1 max-h-[min(70vh,24rem)] overflow-y-auto rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-950 shadow-lg"
+            className={`absolute top-full mt-1 max-h-[min(70vh,24rem)] w-[min(calc(100vw-2rem),22rem)] overflow-y-auto rounded-lg border border-light-border bg-light-card shadow-lg dark:border-dark-border dark:bg-dark-card ${
+              dropdownAlign === "right" ? "right-0 left-auto" : "left-0 right-0 w-auto"
+            }`}
           >
             {filtered.length === 0 ? (
-              <p className="px-3 py-4 text-sm text-neutral-500 text-center">No tools match.</p>
+              <p className="px-3 py-4 text-sm text-slate-500 text-center dark:text-slate-400">
+                No tools match.
+              </p>
             ) : (
               <ul className="py-1" role="listbox" aria-label="Matching tools">
                 {filtered.map((tool, index) => {
@@ -175,17 +180,17 @@ export function ToolSearch() {
                         onMouseEnter={() => setActiveIndex(index)}
                         className={`block px-3 py-2.5 text-left transition-colors ${
                           active
-                            ? "bg-neutral-100 dark:bg-neutral-800"
-                            : "hover:bg-neutral-50 dark:hover:bg-neutral-900"
+                            ? "bg-primary/10 dark:bg-primary/15"
+                            : "hover:bg-slate-100 dark:hover:bg-slate-800/80"
                         }`}
                       >
-                        <div className="font-medium text-sm text-neutral-900 dark:text-neutral-100">
+                        <div className="font-medium text-sm text-slate-900 dark:text-slate-100">
                           {tool.title}
                         </div>
-                        <div className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-2">
+                        <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">
                           {tool.description}
                         </div>
-                        <div className="text-[10px] uppercase tracking-wider text-neutral-400 mt-1">
+                        <div className="text-[10px] uppercase tracking-wider text-slate-400 mt-1">
                           {tool.category}
                         </div>
                       </Link>
@@ -194,20 +199,20 @@ export function ToolSearch() {
                 })}
               </ul>
             )}
-            <p className="px-3 py-2 text-[10px] text-neutral-400 border-t border-neutral-100 dark:border-neutral-800">
-              <kbd className="px-1 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 font-mono">
+            <p className="px-3 py-2 text-[10px] text-slate-400 border-t border-light-border dark:border-dark-border">
+              <kbd className="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">
                 ↑↓
               </kbd>{" "}
               navigate ·{" "}
-              <kbd className="px-1 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 font-mono">
+              <kbd className="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">
                 Enter
               </kbd>{" "}
               open ·{" "}
-              <kbd className="px-1 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 font-mono">
+              <kbd className="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">
                 Esc
               </kbd>{" "}
               close ·{" "}
-              <kbd className="px-1 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 font-mono">
+              <kbd className="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">
                 Ctrl K
               </kbd>{" "}
               focus

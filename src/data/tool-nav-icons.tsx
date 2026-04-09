@@ -1,0 +1,68 @@
+import type { LucideIcon } from "lucide-react";
+import {
+  ArrowLeftRight,
+  Barcode,
+  Braces,
+  CalendarDays,
+  Clock,
+  Code,
+  Columns3,
+  Cookie,
+  Database,
+  Eye,
+  FileCode,
+  FileSpreadsheet,
+  FileText,
+  Fingerprint,
+  GitBranch,
+  GitCompare,
+  Hash,
+  IdCard,
+  Key,
+  Languages,
+  Link2,
+  Palette,
+  SearchCode,
+  Shield,
+  Shuffle,
+  Terminal,
+  UserCog,
+  Vault,
+} from "lucide-react";
+
+const ICONS: Record<string, LucideIcon> = {
+  "json-formatter": Braces,
+  "json-to-csv": FileSpreadsheet,
+  "json-to-code": Code,
+  "json-compare": GitCompare,
+  "format-converter": ArrowLeftRight,
+  "sql-formatter": Database,
+  "diff-checker": Columns3,
+  "markdown-previewer": FileText,
+  "html-to-markdown": FileCode,
+  "color-converter": Palette,
+  "base64-encoder": Barcode,
+  "url-encoder": Link2,
+  "cookie-compare": Cookie,
+  "params-compare": SearchCode,
+  "html-encoder": GitBranch,
+  "bcrypt-generator": Vault,
+  "password-generator": Key,
+  "sha256-generator": Shield,
+  "jwt-decoder": Fingerprint,
+  "jwt-generator": IdCard,
+  "uuid-generator": Hash,
+  "random-data": Shuffle,
+  "mock-profile-generator": UserCog,
+  "multilingual-text-generator": Languages,
+  "unix-timestamp": Clock,
+  "cron-parser": CalendarDays,
+  "regex-tester": Terminal,
+  "open-graph-viewer": Eye,
+};
+
+const DEFAULT_ICON = Terminal;
+
+export function getToolNavIcon(slug: string): LucideIcon {
+  return ICONS[slug] ?? DEFAULT_ICON;
+}

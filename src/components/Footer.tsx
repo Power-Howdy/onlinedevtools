@@ -1,41 +1,59 @@
 "use client";
 
+const githubRepo = process.env.NEXT_PUBLIC_GITHUB_REPO;
+
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-neutral-200 bg-white/70 backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-950/70">
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <footer className="mt-auto border-t border-light-border bg-light-card/50 backdrop-blur-sm dark:border-dark-border dark:bg-dark-card/50">
+      <div className="max-w-6xl mx-auto px-4 py-10">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-              Online Dev Tools
-            </h3>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400">
-              Free developer utilities for JSON formatting, encoding, timestamp conversion, and more. All tools run in your browser with no installation required.
+            <h3 className="text-sm font-semibold text-primary mb-2">DevToolBox</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Free developer utilities for JSON formatting, encoding, timestamps, and more. All tools run in your
+              browser with no installation required.
             </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+              Navigate
+            </h3>
+            <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-2">
+              <li>
+                <a href="/" className="hover:text-primary transition-colors">
+                  Home &amp; all tools
+                </a>
+              </li>
+              {githubRepo && (
+                <li>
+                  <a
+                    href={githubRepo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Source on GitHub
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
               Contact
             </h3>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
-              Questions or feedback?{" "}
-              
-            </p>
-            <ul className="text-sm text-neutral-500 dark:text-neutral-400 space-y-1">
+            <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-2">
               <li>
-              <a
-                href="mailto:giftedclan0305@gmail.com"
-                className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline"
-              >
-                Email
-              </a>
+                <a href="mailto:giftedclan0305@gmail.com" className="hover:text-primary transition-colors underline">
+                  Email
+                </a>
               </li>
               <li>
                 <a
                   href="https://x.com/coocoohive"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline"
+                  className="hover:text-primary transition-colors underline"
                 >
                   X (Twitter)
                 </a>
@@ -45,7 +63,7 @@ export function Footer() {
                   href="https://www.instagram.com/giftedclan0305"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline"
+                  className="hover:text-primary transition-colors underline"
                 >
                   Instagram
                 </a>
@@ -55,7 +73,7 @@ export function Footer() {
                   href="https://www.indiehackers.com/IndieHacker0228"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline"
+                  className="hover:text-primary transition-colors underline"
                 >
                   Indie Hackers
                 </a>
@@ -63,32 +81,33 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
               About
             </h3>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400">
-              Built for developers who need quick, reliable tools. No sign-up, no tracking, no installation. All processing happens locally in your browser.
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Built for developers who need quick, reliable tools. No sign-up, no tracking, no installation. Processing
+              happens locally in your browser.
             </p>
-            <p className="mt-2 text-sm">
+            <p className="mt-3 text-sm">
               <a
                 href="mailto:giftedclan0305@gmail.com?subject=Pro%20API%20Interest"
-                className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 underline"
+                className="text-primary/90 hover:text-primary underline"
               >
                 Need API access? Pro coming soon
               </a>
             </p>
           </div>
         </div>
-        <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800 text-sm text-neutral-500 dark:text-neutral-400 text-center">
-          © {new Date().getFullYear()} Online Dev Tools. All tools are free to use.
-          {process.env.NEXT_PUBLIC_GITHUB_REPO && (
+        <div className="mt-10 pt-6 border-t border-light-border dark:border-dark-border text-sm text-slate-500 dark:text-slate-400 text-center flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+          <span>© {new Date().getFullYear()} Online Dev Tools. All tools are free to use.</span>
+          {githubRepo && (
             <>
-              {" · "}
+              <span aria-hidden>·</span>
               <a
-                href={process.env.NEXT_PUBLIC_GITHUB_REPO}
+                href={githubRepo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-neutral-900 dark:hover:text-neutral-100 underline"
+                className="hover:text-primary transition-colors underline"
               >
                 GitHub
               </a>

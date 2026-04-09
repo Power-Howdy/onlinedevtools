@@ -5,26 +5,15 @@
 :root {
   --header-height: 4.5rem;
   --footer-height: 18rem;
-  --foreground: #171717;
-  --background: #fafafa;
-  --card: #ffffff;
-  --card-border: #e5e5e5;
-  --muted: #737373;
   --scrollbar-sidebar-size: 5px;
-  --scrollbar-sidebar-track: rgba(0, 0, 0, 0.06);
-  --scrollbar-sidebar-thumb: rgba(0, 0, 0, 0.22);
-  --scrollbar-sidebar-thumb-hover: rgba(0, 0, 0, 0.38);
+  --scrollbar-sidebar-track: transparent;
+  --scrollbar-sidebar-thumb: #cbd5e1;
+  --scrollbar-sidebar-thumb-hover: #94a3b8;
 }
 
 .dark {
-  --foreground: #edededd4;
-  --background: #0a0a0ae7;
-  --card: #171717c0;
-  --card-border: #262626c5;
-  --muted: #a3a3a3;
-  --scrollbar-sidebar-track: rgba(255, 255, 255, 0.06);
-  --scrollbar-sidebar-thumb: rgba(255, 255, 255, 0.22);
-  --scrollbar-sidebar-thumb-hover: rgba(255, 255, 255, 0.4);
+  --scrollbar-sidebar-thumb: #334155;
+  --scrollbar-sidebar-thumb-hover: #475569;
 }
 
 html {
@@ -33,20 +22,50 @@ html {
 
 body {
   min-height: 100dvh;
-  color: var(--foreground);
-  background-color: var(--background);
-  background-image: url("/assets/bg_light.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-}
-
-html.dark body {
-  background-image: url("/assets/bg-dark.png");
+  @apply bg-light-bg text-slate-900 dark:bg-dark-bg dark:text-slate-100;
 }
 
 @layer utilities {
+  .bg-pattern {
+    background-image: radial-gradient(
+      circle at 2px 2px,
+      rgba(56, 189, 248, 0.05) 1px,
+      transparent 0
+    );
+    background-size: 24px 24px;
+  }
+
+  .dark .bg-pattern {
+    background-image: radial-gradient(
+      circle at 2px 2px,
+      rgba(56, 189, 248, 0.03) 1px,
+      transparent 0
+    );
+  }
+
+  .tool-view {
+    animation: toolViewFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Stagger form controls slightly after the tool shell starts (matches new_design.html intent) */
+  .tool-view textarea,
+  .tool-view select {
+    animation: toolViewFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation-delay: 0.1s;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  @keyframes toolViewFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .sidebar-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-sidebar-thumb) var(--scrollbar-sidebar-track);
@@ -58,14 +77,13 @@ html.dark body {
   }
 
   .sidebar-scrollbar::-webkit-scrollbar-track {
-    margin: 4px 0;
     background: var(--scrollbar-sidebar-track);
-    border-radius: 9999px;
+    border-radius: 10px;
   }
 
   .sidebar-scrollbar::-webkit-scrollbar-thumb {
     background: var(--scrollbar-sidebar-thumb);
-    border-radius: 9999px;
+    border-radius: 10px;
   }
 
   .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {

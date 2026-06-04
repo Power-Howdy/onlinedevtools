@@ -478,6 +478,27 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
+    slug: "signature-generator",
+    title: "Signature Generator",
+    description:
+      "Draw or type a signature and download a PNG. Transparent background support—runs entirely in your browser.",
+    category: "Generators",
+    seoTitle: "Free Online Signature Generator – Draw or Type & Download PNG",
+    seoDescription:
+      "Create a digital signature online. Draw with mouse or touch, or type your name in script fonts. Download PNG with transparent or white background. Free, client-side, no upload.",
+    keywords: [
+      "signature generator",
+      "digital signature",
+      "sign online",
+      "draw signature",
+      "type signature",
+      "signature png",
+      "electronic signature",
+      "free signature maker",
+      "developer tools",
+    ],
+  },
+  {
     slug: "unix-timestamp",
     title: "Unix Timestamp Converter",
     description: "Convert Unix timestamp to human date and vice versa. Timezone support.",

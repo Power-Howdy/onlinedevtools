@@ -1,6 +1,16 @@
 "use client";
 
-import { Dancing_Script, Great_Vibes, Sacramento } from "next/font/google";
+import {
+  Caveat,
+  Dancing_Script,
+  Great_Vibes,
+  Handlee,
+  Kalam,
+  Patrick_Hand,
+  Sacramento,
+  Satisfy,
+  Shadows_Into_Light,
+} from "next/font/google";
 import {
   useCallback,
   useEffect,
@@ -24,6 +34,13 @@ import {
   type SignatureFontId,
 } from "@/lib/signature";
 
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature-caveat",
+  display: "swap",
+});
+
 const dancingScript = Dancing_Script({
   subsets: ["latin"],
   variable: "--font-signature-dancing",
@@ -37,6 +54,27 @@ const greatVibes = Great_Vibes({
   display: "swap",
 });
 
+const handlee = Handlee({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature-handlee",
+  display: "swap",
+});
+
+const kalam = Kalam({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature-kalam",
+  display: "swap",
+});
+
+const patrickHand = Patrick_Hand({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature-patrick-hand",
+  display: "swap",
+});
+
 const sacramento = Sacramento({
   subsets: ["latin"],
   weight: "400",
@@ -44,11 +82,43 @@ const sacramento = Sacramento({
   display: "swap",
 });
 
-const fontClassName = `${dancingScript.variable} ${greatVibes.variable} ${sacramento.variable}`;
+const satisfy = Satisfy({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature-satisfy",
+  display: "swap",
+});
+
+const shadowsIntoLight = Shadows_Into_Light({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature-shadows-into-light",
+  display: "swap",
+});
+
+const fontClassName = [
+  caveat.variable,
+  dancingScript.variable,
+  handlee.variable,
+  greatVibes.variable,
+  kalam.variable,
+  patrickHand.variable,
+  sacramento.variable,
+  satisfy.variable,
+  shadowsIntoLight.variable,
+]
+  .filter(Boolean)
+  .join(" ");
 const signatureFontFamilies: Record<SignatureFontId, string> = {
+  caveat: caveat.style.fontFamily,
   "dancing-script": dancingScript.style.fontFamily,
+  handlee: handlee.style.fontFamily,
   "great-vibes": greatVibes.style.fontFamily,
+  kalam: kalam.style.fontFamily,
+  "patrick-hand": patrickHand.style.fontFamily,
   "sacramento": sacramento.style.fontFamily,
+  satisfy: satisfy.style.fontFamily,
+  "shadows-into-light": shadowsIntoLight.style.fontFamily,
 };
 
 function getCanvasFontFamily(fontFamily: string): string {
@@ -69,7 +139,7 @@ type SignatureMode = "draw" | "type";
 const SIGNATURE_DEFAULTS = {
   mode: "draw" as SignatureMode,
   typedText: "",
-  fontId: "dancing-script" as SignatureFontId,
+  fontId: "caveat" as SignatureFontId,
   strokeColor: "#111827",
   strokeWidth: 2,
   background: "transparent" as SignatureBackground,

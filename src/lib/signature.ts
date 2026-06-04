@@ -1,9 +1,15 @@
 export type SignatureBackground = "transparent" | "white";
 
 export const SIGNATURE_FONT_IDS = [
+  "caveat",
   "dancing-script",
+  "handlee",
   "great-vibes",
+  "kalam",
+  "patrick-hand",
   "sacramento",
+  "satisfy",
+  "shadows-into-light",
 ] as const;
 
 export type SignatureFontId = (typeof SIGNATURE_FONT_IDS)[number];
@@ -14,9 +20,19 @@ export const SIGNATURE_FONTS: {
   cssFamily: string;
 }[] = [
   {
+    id: "caveat",
+    label: "Caveat",
+    cssFamily: "var(--font-signature-caveat), cursive",
+  },
+  {
     id: "dancing-script",
     label: "Dancing Script",
     cssFamily: "var(--font-signature-dancing), cursive",
+  },
+  {
+    id: "handlee",
+    label: "Handlee",
+    cssFamily: "var(--font-signature-handlee), cursive",
   },
   {
     id: "great-vibes",
@@ -24,9 +40,29 @@ export const SIGNATURE_FONTS: {
     cssFamily: "var(--font-signature-great-vibes), cursive",
   },
   {
+    id: "kalam",
+    label: "Kalam",
+    cssFamily: "var(--font-signature-kalam), cursive",
+  },
+  {
+    id: "patrick-hand",
+    label: "Patrick Hand",
+    cssFamily: "var(--font-signature-patrick-hand), cursive",
+  },
+  {
     id: "sacramento",
     label: "Sacramento",
     cssFamily: "var(--font-signature-sacramento), cursive",
+  },
+  {
+    id: "satisfy",
+    label: "Satisfy",
+    cssFamily: "var(--font-signature-satisfy), cursive",
+  },
+  {
+    id: "shadows-into-light",
+    label: "Shadows Into Light",
+    cssFamily: "var(--font-signature-shadows-into-light), cursive",
   },
 ];
 

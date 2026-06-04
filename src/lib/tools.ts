@@ -458,6 +458,26 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
+    slug: "pdf-invoice-generator",
+    title: "PDF Invoice Generator",
+    description:
+      "Create professional invoices in your browser. Fill in seller, buyer, line items, and tax—then download a PDF. No signup, no server upload.",
+    category: "Generators",
+    seoTitle: "Free PDF Invoice Generator Online – Create & Download Invoices",
+    seoDescription:
+      "Generate PDF invoices in your browser. Add line items, tax, and payment terms, preview live, and download instantly. Free client-side invoice maker.",
+    keywords: [
+      "pdf invoice generator",
+      "invoice maker",
+      "create invoice online",
+      "free invoice generator",
+      "download invoice pdf",
+      "invoice template",
+      "client-side invoice",
+      "developer tools",
+    ],
+  },
+  {
     slug: "unix-timestamp",
     title: "Unix Timestamp Converter",
     description: "Convert Unix timestamp to human date and vice versa. Timezone support.",

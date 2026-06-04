@@ -27,6 +27,10 @@ export function getToolMetadata(slug: string): Metadata {
   );
 }
 
+export function getToolOgImageUrl(slug: string): string {
+  return `${baseUrl}/api/og/tools/${slug}`;
+}
+
 export function toolMetadata(
   title: string,
   description: string,
@@ -34,6 +38,7 @@ export function toolMetadata(
   keywords?: string[]
 ): Metadata {
   const url = `${baseUrl}/${slug}`;
+  const ogImageUrl = getToolOgImageUrl(slug);
   const allKeywords = [...(keywords ?? []), ...SITE_KEYWORDS];
   return {
     title,
@@ -46,11 +51,13 @@ export function toolMetadata(
       url,
       siteName: "Online Dev Tools",
       type: "website",
+      images: [{ url: ogImageUrl, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [ogImageUrl],
     },
     alternates: {
       canonical: url,

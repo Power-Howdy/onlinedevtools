@@ -33,7 +33,7 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  const Icon = getToolNavIcon(tool.slug);
+  const ToolIcon = getToolNavIcon(tool.slug);
   const accent = CATEGORY_ACCENTS[tool.category];
 
   return new ImageResponse(
@@ -80,7 +80,7 @@ export async function GET(
                 color: "#ffffff",
               }}
             >
-              <Icon size={36} strokeWidth={2.25} />
+              <ToolIcon size={36} strokeWidth={2.25} />
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               <div

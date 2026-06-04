@@ -13,7 +13,6 @@ import { useToolSettings } from "@/hooks/useToolSettings";
 import {
   canvasToPngBlob,
   fillCanvasBackground,
-  getFontCssFamily,
   MAX_UNDO_STACK,
   renderTypedSignature,
   sanitizeSignatureFilename,
@@ -46,6 +45,24 @@ const sacramento = Sacramento({
 });
 
 const fontClassName = `${dancingScript.variable} ${greatVibes.variable} ${sacramento.variable}`;
+const signatureFontFamilies: Record<SignatureFontId, string> = {
+  "dancing-script": dancingScript.style.fontFamily,
+  "great-vibes": greatVibes.style.fontFamily,
+  "sacramento": sacramento.style.fontFamily,
+};
+
+function getCanvasFontFamily(fontFamily: string): string {
+  return fontFamily
+    .split(",")
+    .map((family) => family.trim())
+    .filter(Boolean)
+    .map((family) => {
+      if (/^["'].*["']$/.test(family)) return family;
+      if (/^[a-z0-9_-]+$/i.test(family)) return family;
+      return `"${family.replace(/"/g, '\\"')}"`;
+    })
+    .join(", ");
+}
 
 type SignatureMode = "draw" | "type";
 
@@ -102,12 +119,19 @@ export function SignatureGeneratorTool() {
   const renderTypeMode = useCallback(async () => {
     const ctx = ctxRef.current ?? initCanvas();
     if (!ctx) return;
-    if (typeof document !== "undefined" && document.fonts?.ready) {
+    const canvasFontFamily = getCanvasFontFamily(signatureFontFamilies[fontId]);
+    if (typeof document !== "undefined" && document.fonts) {
       await document.fonts.ready;
+      const previewText = typedText.trim() || "Aa";
+      const fontSize = Math.min(
+        72,
+        Math.max(32, Math.floor(SIGNATURE_CANVAS_WIDTH / (previewText.length * 0.55)))
+      );
+      await document.fonts.load(`${fontSize}px ${canvasFontFamily}`, previewText);
     }
     renderTypedSignature(ctx, {
       text: typedText,
-      fontFamily: getFontCssFamily(fontId),
+      fontFamily: canvasFontFamily,
       strokeColor,
       background,
     });

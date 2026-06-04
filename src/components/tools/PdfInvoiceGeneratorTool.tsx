@@ -85,7 +85,7 @@ function InvoicePreview({ data }: { data: InvoiceData }) {
   return (
     <div
       className="rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-white p-8 text-[13px] text-neutral-900 shadow-sm min-h-[320px] max-w-3xl mx-auto"
-      style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
+      style={{ fontFamily: "Helvetica, Arial, sans-serif", minHeight: "1020px" }}
     >
       <div className="flex justify-between items-start gap-6 mb-8">
         <div className="min-w-0">
@@ -290,6 +290,23 @@ export function PdfInvoiceGeneratorTool() {
     });
   }, [setData]);
 
+  const buttons = <div className="flex flex-wrap gap-3">
+  <button
+    type="button"
+    onClick={handleDownload}
+    className="px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium rounded-lg hover:bg-neutral-700 dark:hover:bg-neutral-200"
+  >
+    Download PDF
+  </button>
+  <button
+    type="button"
+    onClick={handleReset}
+    className="px-4 py-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-medium rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700"
+  >
+    Reset to sample
+  </button>
+</div>
+
   return (
     <div className="space-y-4">
       <p className="text-sm text-neutral-600 dark:text-neutral-400 rounded-lg border border-emerald-200/80 dark:border-emerald-900/50 bg-emerald-50/80 dark:bg-emerald-950/30 px-3 py-2">
@@ -297,22 +314,7 @@ export function PdfInvoiceGeneratorTool() {
         server. Form fields are saved locally on this device only.
       </p>
 
-      <div className="flex flex-wrap gap-3">
-        <button
-          type="button"
-          onClick={handleDownload}
-          className="px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium rounded-lg hover:bg-neutral-700 dark:hover:bg-neutral-200"
-        >
-          Download PDF
-        </button>
-        <button
-          type="button"
-          onClick={handleReset}
-          className="px-4 py-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-medium rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700"
-        >
-          Reset to sample
-        </button>
-      </div>
+      { buttons }
 
       <div className="space-y-4">
         <div className="grid gap-4 md:grid-cols-2">
@@ -525,6 +527,8 @@ export function PdfInvoiceGeneratorTool() {
         <label className={labelClass}>Preview</label>
         <InvoicePreview data={data} />
       </div>
+      <hr/>
+      { buttons }
     </div>
   );
 }

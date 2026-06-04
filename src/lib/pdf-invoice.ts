@@ -90,24 +90,24 @@ function newLineItem(
 
 export const DEFAULT_INVOICE_DATA: InvoiceData = {
   seller: {
-    name: "Minghuan Zheng",
-    email: "",
-    address: "",
+    name: "ACME Corporation",
+    email: "acme@example.com",
+    address: "123 Main St, Anytown, USA",
   },
   buyer: {
-    name: "Finance Lobby LLC",
-    email: "",
-    address: "",
+    name: "John Doe",
+    email: "john.doe@example.com",
+    address: "456 Oak Ave, Othertown, USA",
   },
-  invoiceNumber: "2",
+  invoiceNumber: "INV-2026-0001",
   issueDate: todayIso(),
   dueDate: dueDateIso(3),
   currency: "USD",
   taxRate: 0,
   lineItems: [
-    newLineItem("Software development service", 100, 25),
+    newLineItem("Software development service", 100, 35),
   ],
-  notes: "",
+  notes: "Thank you for your business!",
 };
 
 export function formatMoney(amount: number, currency: string): string {

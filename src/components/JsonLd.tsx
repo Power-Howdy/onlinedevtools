@@ -1,4 +1,6 @@
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools-three.vercel.app";
+import { SITE_URL } from "@/lib/site";
+
+const baseUrl = SITE_URL;
 
 const webApplicationSchema = {
   "@context": "https://schema.org",

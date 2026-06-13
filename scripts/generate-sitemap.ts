@@ -4,8 +4,7 @@ import { TOOLS } from "../src/lib/tools";
 import { CRON_PATTERNS } from "../src/data/cron-patterns";
 import { REGEX_PATTERNS } from "../src/data/regex-patterns";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools-three.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://free-dev-tools.com";
 
 function escapeXml(unsafe: string): string {
   return unsafe

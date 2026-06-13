@@ -41,7 +41,7 @@ npm start
 
 ## Deployment
 
-1. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` to your production URL (e.g. `https://yourdomain.com`).
+1. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` to your production URL (default: `https://free-dev-tools.com`).
 2. Run `npm run build` and `npm start`, or deploy to Vercel/Netlify.
 3. Ensure the site is served over HTTPS (required for clipboard API).
 

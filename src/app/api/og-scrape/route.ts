@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { SITE_URL } from "@/lib/site";
 
 type OgMeta = {
   title?: string;
@@ -110,7 +111,7 @@ export async function GET(request: Request): Promise<NextResponse<OgSuccess | Og
       redirect: "follow",
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (compatible; OnlineDevTools-OG-Scraper/1.0; +https://onlinedevtools.com)",
+          `Mozilla/5.0 (compatible; OnlineDevTools-OG-Scraper/1.0; +${SITE_URL})`,
       },
     });
 

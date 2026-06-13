@@ -5,6 +5,7 @@ import { AppShell } from "@/components/AppShell";
 
 import { Toaster } from "@/components/Toaster";
 import { JsonLd } from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/site";
 // import { Analytics } from "@/components/Analytics";
 import { Analytics } from '@vercel/analytics/next';
 
@@ -14,7 +15,7 @@ const firaCode = Fira_Code({
   variable: "--font-mono",
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools-three.vercel.app";
+const baseUrl = SITE_URL;
 
 export const metadata: Metadata = {
   title: {

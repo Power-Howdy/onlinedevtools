@@ -32,6 +32,7 @@ import { __iconNode as TerminalIconNode } from "lucide-react/dist/esm/icons/term
 import { __iconNode as UserCogIconNode } from "lucide-react/dist/esm/icons/user-cog.js";
 import { __iconNode as VaultIconNode } from "lucide-react/dist/esm/icons/vault.js";
 import { TOOLS, type ToolCategory } from "@/lib/tools";
+import { SITE_DISPLAY_HOST } from "@/lib/site";
 
 export const runtime = "edge";
 
@@ -258,7 +259,7 @@ export async function GET(
             color: "rgba(255,255,255,0.7)",
           }}
         >
-          <div>onlinedevtools-three.vercel.app</div>
+          <div>{SITE_DISPLAY_HOST}</div>
           <div style={{ color: accent, fontWeight: 700 }}>{tool.slug}</div>
         </div>
       </div>

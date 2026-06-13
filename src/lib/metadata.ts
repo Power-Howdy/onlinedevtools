@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
 import { TOOLS } from "@/lib/tools";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onlinedevtools-three.vercel.app";
+const baseUrl = SITE_URL;
 
 /** Site-wide keywords added to every page (branding + discoverability). */
 const SITE_KEYWORDS = [

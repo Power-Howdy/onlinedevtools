@@ -4,7 +4,7 @@ export const TOOL_CATEGORIES = [
   "Encoding",
   "Security & Auth",
   "Generators",
-  "Documents",
+  "Business Tools",
   "Time",
   "Utilities",
 ] as const;
@@ -477,7 +477,7 @@ export const TOOLS: Tool[] = [
     title: "PDF Invoice Generator",
     description:
       "Free online invoice maker. Create professional PDF invoices in your browser—seller, buyer, line items, tax, and notes. No signup, no upload.",
-    category: "Documents",
+    category: "Business Tools",
     seoTitle: "Free PDF Invoice Generator Online – No Sign Up | Create & Download",
     seoDescription:
       "Create and download professional PDF invoices free online. Add line items, tax, currency, and payment terms. No signup, no upload—your invoice stays in the browser. Instant PDF download.",
@@ -503,7 +503,7 @@ export const TOOLS: Tool[] = [
     title: "Signature Generator",
     description:
       "Free online signature maker. Draw or type a signature and download a PNG—transparent background, no signup, runs in your browser.",
-    category: "Documents",
+    category: "Business Tools",
     seoTitle: "Free Online Signature Generator – Draw or Type & Download PNG",
     seoDescription:
       "Create a free digital signature online. Draw with mouse or touch, or type your name in script fonts. Download a PNG with transparent background. No signup, no upload—runs in your browser.",

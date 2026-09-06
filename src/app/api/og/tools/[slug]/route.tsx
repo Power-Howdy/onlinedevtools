@@ -45,6 +45,7 @@ const CATEGORY_ACCENTS: Record<ToolCategory, string> = {
   Encoding: "#7c3aed",
   "Security & Auth": "#b91c1c",
   Generators: "#ea580c",
+  Documents: "#0d9488",
   Time: "#0891b2",
   Utilities: "#4f46e5",
 };

@@ -5,6 +5,7 @@ type ToolLayoutProps = {
   title: string;
   description: string;
   slug?: string;
+  wide?: boolean;
   children: React.ReactNode;
 };
 
@@ -16,12 +17,12 @@ function iconSlugForNav(slug?: string): string | undefined {
   return base || undefined;
 }
 
-export function ToolLayout({ title, description, slug, children }: ToolLayoutProps) {
+export function ToolLayout({ title, description, slug, wide, children }: ToolLayoutProps) {
   const key = iconSlugForNav(slug);
   const Icon = key ? getToolNavIcon(key) : null;
 
   const content = (
-    <section className="max-w-4xl mx-auto px-4 py-8">
+    <section className={`${wide ? "max-w-6xl" : "max-w-4xl"} mx-auto px-4 py-8`}>
       <div className="mb-6">
         <div className="flex flex-wrap items-center gap-3">
           {Icon && (

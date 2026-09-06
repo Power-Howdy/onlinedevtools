@@ -9,8 +9,9 @@ export default function OpenGraphViewerPage() {
   return (
     <ToolLayout
       slug="open-graph-viewer"
-      title="Open Graph Viewer"
-      description="Paste a URL to preview its Open Graph metadata, including image, title, and description."
+      title="Social Preview / SEO Debugger"
+      description="Preview how a URL looks on Facebook, LinkedIn, X, Discord, and Slack. Inspect Open Graph, Twitter Cards, canonical URL, favicon, image size, redirects, and missing tags."
+      wide
     >
       <OpenGraphViewerTool />
     </ToolLayout>

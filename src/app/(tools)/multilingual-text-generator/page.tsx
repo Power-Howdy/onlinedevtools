@@ -9,8 +9,8 @@ export default function MultilingualTextGeneratorPage() {
   return (
     <ToolLayout
       slug="multilingual-text-generator"
-      title="Multilingual Text Generator"
-      description="Generate placeholder paragraphs for bios and summaries in English, Chinese, Japanese, Spanish, Italian, and more. Control paragraph count and length, or randomize."
+      title="Multilingual Placeholder Text Generator"
+      description="Generate realistic placeholder content in 16 languages for UI, website, localization, and app testing — including Arabic and Hebrew RTL."
     >
       <LocaleTextGeneratorTool />
     </ToolLayout>

@@ -88,14 +88,6 @@ export function Footer() {
               Built for developers who need quick, reliable tools. No sign-up, no tracking, no installation. Processing
               happens locally in your browser.
             </p>
-            <p className="mt-3 text-sm">
-              <a
-                href="mailto:giftedclan0305@gmail.com?subject=Pro%20API%20Interest"
-                className="text-primary/90 hover:text-primary underline"
-              >
-                Need API access? Pro coming soon
-              </a>
-            </p>
           </div>
         </div>
         <div className="mt-10 pt-6 border-t border-light-border dark:border-dark-border text-sm text-slate-500 dark:text-slate-400 text-center flex flex-wrap items-center justify-center gap-x-2 gap-y-1">

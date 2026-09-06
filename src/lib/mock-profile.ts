@@ -37,6 +37,8 @@ import {
   fakerZH_CN,
   fakerZH_TW,
 } from "@faker-js/faker";
+import { recordsToCsv, recordsToJson } from "@/lib/data-export";
+import { generateLocaleSnippet } from "@/lib/locale-text-generator";
 
 export type GenderOption = "any" | "female" | "male";
 
@@ -132,9 +134,10 @@ export const MOCK_PROFILE_FIELDS: readonly MockProfileField[] = [
 export const DEFAULT_MOCK_PROFILE_FIELDS: MockProfileFieldKey[] =
   MOCK_PROFILE_FIELDS.filter((field) => field.defaultOn).map((field) => field.key);
 
-export const MAX_MOCK_PROFILES = 1000;
+export const MAX_MOCK_PROFILES = 10000;
 export const PREVIEW_ROW_LIMIT = 15;
-export const COUNT_PRESETS = [1, 10, 100, 1000] as const;
+export const COUNT_PRESETS = [10, 100, 1000, 10000] as const;
+export const GENERATE_CHUNK_SIZE = 250;
 
 export type MockProfileCountry = {
   code: string;
@@ -367,18 +370,10 @@ export function profilesToJson(
   profiles: readonly MockProfile[],
   fields: readonly MockProfileFieldKey[]
 ): string {
-  return JSON.stringify(
-    profiles.map((profile) => pickProfileFields(profile, fields)),
-    null,
-    2
+  const keys = sanitizeFieldSelection(fields);
+  return recordsToJson(
+    profiles.map((profile) => pickProfileFields(profile, keys) as Record<string, unknown>)
   );
-}
-
-function escapeCsvCell(value: string): string {
-  if (value.includes(",") || value.includes('"') || value.includes("\n") || value.includes("\r")) {
-    return `"${value.replace(/"/g, '""')}"`;
-  }
-  return value;
 }
 
 export function profilesToCsv(
@@ -386,11 +381,10 @@ export function profilesToCsv(
   fields: readonly MockProfileFieldKey[]
 ): string {
   const keys = sanitizeFieldSelection(fields);
-  const header = keys.join(",");
-  const rows = profiles.map((profile) =>
-    keys.map((key) => escapeCsvCell(String(profile[key] ?? ""))).join(",")
+  return recordsToCsv(
+    profiles.map((profile) => pickProfileFields(profile, keys) as Record<string, unknown>),
+    keys
   );
-  return [header, ...rows].join("\n");
 }
 
 export function profilesToValueList(
@@ -439,7 +433,9 @@ function generateFromEntry(
     companyName: f.company.name(),
     companyWebsite: `https://www.${f.internet.domainName()}`,
     linkedInUrl: buildLinkedInUrl(firstName, lastName),
-    biography: f.lorem.sentences(f.number.int({ min: 2, max: 4 })),
+    biography:
+      generateLocaleSnippet(entry.locale, "short-bio") ??
+      f.lorem.sentences(f.number.int({ min: 2, max: 4 })),
     addressLine1,
     city,
     region,
@@ -467,6 +463,28 @@ export function generateMockProfiles(
 ): MockProfile[] {
   const n = clampCount(count);
   return Array.from({ length: n }, () => generateMockProfile(options));
+}
+
+export async function generateMockProfilesChunked(
+  count: number,
+  options: GenerateMockProfileOptions | undefined,
+  onProgress?: (done: number, total: number) => void
+): Promise<MockProfile[]> {
+  const total = clampCount(count);
+  const out: MockProfile[] = [];
+  for (let i = 0; i < total; i += GENERATE_CHUNK_SIZE) {
+    const chunkSize = Math.min(GENERATE_CHUNK_SIZE, total - i);
+    for (let j = 0; j < chunkSize; j++) {
+      out.push(generateMockProfile(options));
+    }
+    onProgress?.(out.length, total);
+    if (i + chunkSize < total) {
+      await new Promise<void>((resolve) => {
+        window.setTimeout(resolve, 0);
+      });
+    }
+  }
+  return out;
 }
 
 const COUNTRY_FIELDS = new Set<MockProfileFieldKey>([

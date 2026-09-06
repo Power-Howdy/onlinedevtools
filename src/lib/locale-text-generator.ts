@@ -188,6 +188,62 @@ export function isRtlLocale(id: TextLocaleId): boolean {
   return getLocaleOption(id).dir === "rtl";
 }
 
+const TEXT_LOCALE_IDS = new Set<string>(TEXT_LOCALES.map((locale) => locale.id));
+
+/** Map a BCP47 / country locale tag (e.g. en-US, de-DE) onto a TextLocaleId bank when available. */
+export function bcp47ToTextLocaleId(bcp47: string): TextLocaleId | undefined {
+  const raw = bcp47.trim();
+  if (!raw) return undefined;
+  if (TEXT_LOCALE_IDS.has(raw)) return raw as TextLocaleId;
+  const lower = raw.toLowerCase();
+  if (lower === "pt-br" || lower.startsWith("pt-br")) return "pt-BR";
+  if (lower === "zh-cn" || lower.startsWith("zh-hans") || lower === "zh-sg") return "zh-CN";
+  if (lower === "zh-tw" || lower.startsWith("zh-hant") || lower === "zh-hk") return "zh-TW";
+  const primary = raw.split(/[-_]/)[0]?.toLowerCase();
+  if (!primary) return undefined;
+  const byPrimary: Record<string, TextLocaleId> = {
+    en: "en",
+    es: "es",
+    it: "it",
+    fr: "fr",
+    de: "de",
+    pt: "pt-BR",
+    ja: "ja",
+    ru: "ru",
+    pl: "pl",
+    nl: "nl",
+    zh: "zh-CN",
+    ar: "ar",
+    he: "he",
+    ko: "ko",
+    th: "th",
+  };
+  return byPrimary[primary];
+}
+
+/** One short paragraph from a locale text bank (bios / product copy). */
+export function generateLocaleSnippet(
+  bcp47: string,
+  preset: "short-bio" | "product",
+  charTarget = 180
+): string | undefined {
+  const localeId = bcp47ToTextLocaleId(bcp47);
+  if (!localeId) return undefined;
+  const result = generateLocaleText({
+    localeId,
+    mixedLanguages: false,
+    preset,
+    paragraphCount: 1,
+    charTarget,
+    wordTarget: 40,
+    lengthMode: "min-chars",
+    randomParagraphs: false,
+    randomChars: false,
+    randomWords: false,
+  });
+  return result.text.trim() || undefined;
+}
+
 function sentenceBank(localeId: TextLocaleId, preset: ContentPresetId): readonly string[] {
   if (preset === "short-bio") return BIO_BANKS[localeId];
   if (preset === "product") return THEMED_BANKS[localeId].product;

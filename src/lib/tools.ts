@@ -403,11 +403,12 @@ export const TOOLS: Tool[] = [
   {
     slug: "random-data",
     title: "Random Data Generator",
-    description: "Generate random strings, numbers, UUIDs, JSON, and hex.",
+    description:
+      "Generate bulk random strings, numbers, UUIDs, hex, and JSON primitives. For structured users, products, and orders, use the Test Data Generator.",
     category: "Generators",
     seoTitle: "Free Random Data Generator Online",
     seoDescription:
-      "Generate random strings, numbers, UUIDs, hex values, and JSON. Secure client-side random generation.",
+      "Generate random strings, numbers, UUIDs, hex values, and JSON. Bulk copy or download JSON/CSV. Client-side only—use the Test Data Generator for users, products, and orders.",
     keywords: [
       "random data",
       "random string",
@@ -421,11 +422,11 @@ export const TOOLS: Tool[] = [
     slug: "mock-profile-generator",
     title: "Test User & Test Data Generator",
     description:
-      "Generate 1–1,000 synthetic users. Copy JSON or CSV, pick fields, and localize names, emails, phones, and addresses for QA.",
+      "Generate 1–10,000 synthetic users, products, or orders. Copy or download JSON, CSV, SQL, and YAML. Pick fields and localize for QA.",
     category: "Generators",
-    seoTitle: "Free Test User & Test Data Generator – Bulk JSON/CSV",
+    seoTitle: "Free Test User & Test Data Generator – Bulk JSON/CSV/SQL",
     seoDescription:
-      "Generate test user data for development and QA. Bulk generate 1 to 1,000 test users, copy JSON or CSV, and customize fields. Synthetic data only — not real people.",
+      "Generate test user, product, and order data for development and QA. Bulk generate up to 10,000 records, export JSON, CSV, SQL, or YAML, and customize fields. Synthetic data only — not real people.",
     keywords: [
       "test user generator",
       "test data generator",
@@ -439,6 +440,9 @@ export const TOOLS: Tool[] = [
       "generate test users",
       "bulk test data generator",
       "mock profile generator",
+      "fake product generator",
+      "fake order generator",
+      "sql insert generator",
       "developer tools",
     ],
   },

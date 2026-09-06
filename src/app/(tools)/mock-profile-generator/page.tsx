@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ToolLayout } from "@/components/ToolLayout";
+import { RelatedTools } from "@/components/RelatedTools";
 import { MockProfileGeneratorTool } from "@/components/tools/MockProfileGeneratorTool";
 import { getToolMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/site";
@@ -10,7 +12,17 @@ const faqs = [
   {
     question: "Can I generate 100 test users as JSON?",
     answer:
-      "Yes. Choose 100 (or 1, 10, or 1,000), click Generate, then Copy as JSON or download a JSON file. The same set can be copied or downloaded as CSV for spreadsheets and fixtures.",
+      "Yes. Choose 100 (or 10, 1,000, or 10,000), click Generate, then Copy JSON or download a JSON file. The same set can be exported as CSV, SQL INSERT statements, or YAML.",
+  },
+  {
+    question: "Can I generate products and orders too?",
+    answer:
+      "Yes. Switch the dataset tabs to Products or Orders. Products include SKU, price, category, and localized descriptions. Orders include customer fields, totals, and nested line items (flattened to JSON text in CSV/SQL).",
+  },
+  {
+    question: "Does SQL export work for seed scripts?",
+    answer:
+      "Yes. Copy or download SQL to get batched INSERT statements. Set the table name and optionally use snake_case column names (for example first_name) to match common schemas.",
   },
   {
     question: "Does this generate real identities?",
@@ -20,12 +32,17 @@ const faqs = [
   {
     question: "What fields can I generate?",
     answer:
-      "First and last name, username, email, phone, street address, city, state, postcode, date of birth, company, job title, avatar URL, UUID, locale, gender, and optional sandbox credit-card-shaped numbers from published test BINs.",
+      "Users: name, username, email, phone, address, date of birth, company, job title, avatar URL, UUID, locale, gender, and optional sandbox credit-card-shaped numbers. Products and orders expose their own field pickers.",
   },
   {
     question: "Are the credit card numbers real?",
     answer:
       "No. Optional payment fields use well-known sandbox BINs (such as Stripe test Visa 4242). They are shaped like card numbers so payment forms can be tested, and they are not real payment instruments.",
+  },
+  {
+    question: "Will generating 10,000 records freeze my browser?",
+    answer:
+      "Generation runs in chunks in your browser so the UI stays responsive. The preview shows the first 15 rows; copy or download for the full set.",
   },
 ];
 
@@ -55,7 +72,7 @@ const appJsonLd = {
     priceCurrency: "USD",
   },
   description:
-    "Generate bulk synthetic users for development and QA. Copy or download JSON and CSV. Locale-aware test names, emails, addresses, and test card numbers.",
+    "Generate bulk synthetic users, products, and orders for development and QA. Export JSON, CSV, SQL, and YAML. Locale-aware test names, emails, addresses, and commerce fixtures.",
 };
 
 export default function MockProfileGeneratorPage() {
@@ -63,7 +80,7 @@ export default function MockProfileGeneratorPage() {
     <ToolLayout
       slug="mock-profile-generator"
       title="Test User & Test Data Generator"
-      description="Generate 1 to 1,000 synthetic users for development and QA. Copy JSON or CSV, download fixtures, pick fields, and localize names, emails, phones, and addresses."
+      description="Generate 1 to 10,000 synthetic users, products, or orders for development and QA. Export JSON, CSV, SQL, or YAML. Pick fields and localize names, emails, phones, and addresses."
       wide
     >
       <script
@@ -74,19 +91,43 @@ export default function MockProfileGeneratorPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }}
       />
-      <MockProfileGeneratorTool />
+      <Suspense
+        fallback={
+          <p className="text-sm text-slate-500 dark:text-slate-400">Loading generator…</p>
+        }
+      >
+        <MockProfileGeneratorTool />
+      </Suspense>
+
+      <RelatedTools
+        tools={[
+          {
+            href: "/random-data",
+            title: "Random Data Generator",
+            description:
+              "Bulk random strings, numbers, UUIDs, hex, and unstructured JSON primitives.",
+          },
+          {
+            href: "/multilingual-text-generator",
+            title: "Multilingual Placeholder Text",
+            description:
+              "Localized bios, product copy, UI labels, and RTL placeholder text for i18n testing.",
+          },
+        ]}
+      />
 
       <section className="mt-10 space-y-6 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
         <div>
           <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-            Bulk test user data for development
+            Bulk test data for development
           </h2>
           <p className="mt-2">
-            Use this as a test user generator, random user generator, or JSON
-            test data generator when you need dummy customer records for signup
-            forms, seed scripts, demos, and QA. Generate a single mock profile
-            or a thousand test users, then copy JSON for APIs or download CSV
-            for spreadsheets.
+            Use this as a test user generator, fake product generator, or JSON
+            test data generator when you need dummy customer records, catalog
+            fixtures, or order seeds for signup forms, seed scripts, demos, and
+            QA. Generate a single mock profile or ten thousand records, then
+            copy JSON for APIs, download CSV for spreadsheets, or export SQL
+            INSERT statements for local databases.
           </p>
         </div>
         <div>

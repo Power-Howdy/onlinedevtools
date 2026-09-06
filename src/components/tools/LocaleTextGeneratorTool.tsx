@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/lib/clipboard";
 import { useToolSettings } from "@/hooks/useToolSettings";
+import { downloadTextFile, EXPORT_MIME } from "@/lib/data-export";
 import {
   CONTENT_PRESETS,
   DEFAULT_CHAR_TARGET,
@@ -44,16 +46,6 @@ const LOCALE_TEXT_DEFAULTS = {
   randomChars: false,
   randomWords: false,
 };
-
-function downloadTextFile(filename: string, contents: string, mime: string) {
-  const blob = new Blob([contents], { type: mime });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
-}
 
 export function LocaleTextGeneratorTool() {
   const [s, setS] = useToolSettings("main", LOCALE_TEXT_DEFAULTS);
@@ -157,21 +149,21 @@ export function LocaleTextGeneratorTool() {
         return;
       }
       if (format === "txt") {
-        downloadTextFile("placeholder-text.txt", result.text, "text/plain;charset=utf-8");
+        downloadTextFile("placeholder-text.txt", result.text, EXPORT_MIME.txt);
         return;
       }
       if (format === "json") {
         downloadTextFile(
           "placeholder-text.json",
           buildLocaleTextExportJson(result),
-          "application/json;charset=utf-8"
+          EXPORT_MIME.json
         );
         return;
       }
       downloadTextFile(
         "placeholder-text.csv",
         buildLocaleTextExportCsv(result),
-        "text/csv;charset=utf-8"
+        EXPORT_MIME.csv
       );
     },
     [result]
@@ -187,6 +179,16 @@ export function LocaleTextGeneratorTool() {
         — bios, product blurbs, article paragraphs, and UI strings — so you can test layout, fonts,
         and localization. Arabic and Hebrew render right-to-left.
       </div>
+      <p className="text-sm text-neutral-600 dark:text-neutral-400">
+        Need full user, product, or order records?{" "}
+        <Link
+          href="/mock-profile-generator"
+          className="font-medium text-primary underline-offset-2 hover:underline"
+        >
+          Open the Test Data Generator
+        </Link>
+        .
+      </p>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>

@@ -1,21 +1,58 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/site";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_OG_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/site";
 import { TOOLS } from "@/lib/tools";
 
 const baseUrl = SITE_URL;
 
-/** Site-wide keywords added to every page (branding + discoverability). */
-const SITE_KEYWORDS = [
-  "free",
-  "devtools",
-  "online",
-  "Severus Snape",
-  "Full Stack Developer",
-  "Javascript Developer",
-  "Next.js Developer",
-  "React Developer",
-  "TypeScript Developer",
+/** Extra keywords merged onto every tool page (keep short and on-topic). */
+const TOOL_PAGE_SITE_KEYWORDS = [
+  "free developer utilities",
+  "online developer tools",
+  "no signup",
+  "browser based",
+  SITE_NAME.toLowerCase(),
 ];
+
+export function getHomeMetadata(): Metadata {
+  return {
+    title: {
+      absolute: SITE_TITLE,
+    },
+    description: SITE_DESCRIPTION,
+    keywords: SITE_KEYWORDS,
+    robots: { index: true, follow: true },
+    openGraph: {
+      title: SITE_TITLE,
+      description: SITE_OG_DESCRIPTION,
+      url: baseUrl,
+      siteName: SITE_NAME,
+      type: "website",
+      locale: "en_US",
+      images: [
+        {
+          url: "/assets/image.png",
+          alt: `${SITE_NAME} – free developer utilities, no sign-up`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: SITE_TITLE,
+      description: SITE_OG_DESCRIPTION,
+      images: ["/assets/image.png"],
+    },
+    alternates: {
+      canonical: baseUrl,
+    },
+  };
+}
 
 export function getToolMetadata(slug: string): Metadata {
   const tool = TOOLS.find((t) => t.slug === slug);
@@ -40,7 +77,7 @@ export function toolMetadata(
 ): Metadata {
   const url = `${baseUrl}/${slug}`;
   const ogImageUrl = getToolOgImageUrl(slug);
-  const allKeywords = [...(keywords ?? []), ...SITE_KEYWORDS];
+  const allKeywords = [...(keywords ?? []), ...TOOL_PAGE_SITE_KEYWORDS];
   return {
     title,
     description,
@@ -50,7 +87,7 @@ export function toolMetadata(
       title,
       description,
       url,
-      siteName: "Online Dev Tools",
+      siteName: SITE_NAME,
       type: "website",
       images: [{ url: ogImageUrl, alt: title }],
     },

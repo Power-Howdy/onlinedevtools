@@ -1,6 +1,10 @@
+import type { Metadata } from "next";
 import { Lock, Sparkles, Terminal } from "lucide-react";
 import { ToolCard } from "@/components/ToolCard";
 import { TOOLS, TOOL_CATEGORIES } from "@/lib/tools";
+import { getHomeMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = getHomeMetadata();
 
 const toolsByCategory = TOOL_CATEGORIES.map((category) => ({
   category,
@@ -16,11 +20,12 @@ export default function HomePage() {
             <Terminal className="h-10 w-10 md:h-12 md:w-12" strokeWidth={1.75} aria-hidden />
           </div>
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-4xl">
-            Free Developer Tools
+            Free Developer Utilities
           </h1>
           <p className="mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-400 md:text-lg">
-            Format JSON, decode JWTs, convert timestamps, test regex, and more. No installation required — everything
-            runs in your browser.
+            No sign-up, no install. Format JSON, decode JWTs, convert timestamps, test regex, create
+            PDF invoices, generate signatures, and more — privacy-first tools that run entirely in
+            your browser.
           </p>
           <div className="mt-10 grid w-full max-w-2xl gap-4 sm:grid-cols-2 text-left">
             <div className="rounded-2xl border border-light-border bg-light-card p-5 shadow-sm dark:border-dark-border dark:bg-dark-card">

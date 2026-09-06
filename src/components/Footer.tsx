@@ -1,5 +1,7 @@
 "use client";
 
+import { SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+
 const githubRepo = process.env.NEXT_PUBLIC_GITHUB_REPO;
 
 export function Footer() {
@@ -8,9 +10,9 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-10">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="text-sm font-semibold text-primary mb-2">DevToolBox</h3>
+            <h3 className="text-sm font-semibold text-primary mb-2">{SITE_NAME}</h3>
             <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Free developer utilities for JSON formatting, encoding, timestamps, and more. All tools run in your
+              {SITE_TAGLINE}. JSON formatting, encoding, timestamps, JWT, regex, and more — all tools run in your
               browser with no installation required.
             </p>
           </div>
@@ -91,7 +93,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 pt-6 border-t border-light-border dark:border-dark-border text-sm text-slate-500 dark:text-slate-400 text-center flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-          <span>© {new Date().getFullYear()} Online Dev Tools. All tools are free to use.</span>
+          <span>© {new Date().getFullYear()} {SITE_NAME}. All tools are free to use.</span>
           {githubRepo && (
             <>
               <span aria-hidden>·</span>

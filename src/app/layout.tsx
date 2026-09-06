@@ -5,7 +5,14 @@ import { AppShell } from "@/components/AppShell";
 
 import { Toaster } from "@/components/Toaster";
 import { JsonLd } from "@/components/JsonLd";
-import { SITE_URL } from "@/lib/site";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_OG_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/site";
 // import { Analytics } from "@/components/Analytics";
 import { Analytics } from '@vercel/analytics/next';
 
@@ -19,49 +26,47 @@ const baseUrl = SITE_URL;
 
 export const metadata: Metadata = {
   title: {
-    default: "Online Dev Tools - Free Developer Utilities",
-    template: "%s | Online Dev Tools",
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Free online developer tools: JSON formatter, JWT decoder, Base64 encoder, Unix timestamp converter, regex tester, and more. No installation required.",
-  keywords: [
-    "online dev tools",
-    "free developer tools",
-    "free",
-    "devtools",
-    "online",
-    "Severus Snape",
-    "Full Stack Developer",
-    "Javascript Developer",
-    "Next.js Developer",
-    "React Developer",
-    "TypeScript Developer",
-    "json formatter",
-    "jwt decoder",
-    "base64 encoder",
-    "regex tester",
-    "unix timestamp",
-    "uuid generator",
-    "password generator",
-    "sql formatter",
-  ],
-  authors: [{ name: "Severus Snape", url: "mailto:giftedclan0305@gmail.com" }],
+  description: SITE_DESCRIPTION,
+  keywords: SITE_KEYWORDS,
+  applicationName: SITE_NAME,
+  category: "technology",
   metadataBase: new URL(baseUrl),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "Online Dev Tools - Free Developer Utilities",
-    description:
-      "Free online developer tools: JSON formatter, JWT decoder, Base64 encoder, Unix timestamp converter, regex tester, and more.",
+    title: SITE_TITLE,
+    description: SITE_OG_DESCRIPTION,
     url: baseUrl,
-    siteName: "Online Dev Tools",
+    siteName: SITE_NAME,
     type: "website",
-    images: ["/assets/image.png"],
+    locale: "en_US",
+    images: [
+      {
+        url: "/assets/image.png",
+        alt: `${SITE_NAME} – free developer utilities, no sign-up`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Online Dev Tools - Free Developer Utilities",
-    description:
-      "Free online developer tools: JSON formatter, JWT decoder, Base64 encoder, and more.",
+    title: SITE_TITLE,
+    description: SITE_OG_DESCRIPTION,
     images: ["/assets/image.png"],
+  },
+  alternates: {
+    canonical: baseUrl,
   },
   icons: {
     icon: "/assets/icon.png",

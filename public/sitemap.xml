@@ -2,283 +2,283 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://free-dev-tools.com</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/json-formatter</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/json-to-csv</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/json-to-code</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/json-compare</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/format-converter</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/sql-formatter</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/diff-checker</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/markdown-previewer</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/html-to-markdown</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/color-converter</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/base64-encoder</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/url-encoder</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cookie-compare</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/params-compare</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/html-encoder</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/bcrypt-generator</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/password-generator</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/sha256-generator</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/jwt-decoder</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/jwt-generator</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/uuid-generator</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/random-data</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/mock-profile-generator</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/multilingual-text-generator</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/pdf-invoice-generator</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/signature-generator</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/unix-timestamp</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-parser</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/regex-tester</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/open-graph-viewer</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/every-hour</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/every-5-minutes</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/daily-midnight</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/daily-noon</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/weekly-sunday</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/monthly</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/weekdays-9am</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/every-15-minutes</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/every-2-hours</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/cron-explainer/daily-3-30am</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/regex/email</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/regex/url</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/regex/ipv4</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/regex/password</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/regex/phone</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://free-dev-tools.com/regex/hex-color</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

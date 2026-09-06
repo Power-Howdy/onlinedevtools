@@ -6,6 +6,7 @@ import { Menu, Terminal } from "lucide-react";
 import { ThemeSwitch } from "./ThemeSwitch";
 import { ToolSearch } from "./ToolSearch";
 import { useToolNavDrawer } from "@/contexts/ToolNavDrawerContext";
+import { SITE_NAME } from "@/lib/site";
 
 const githubRepo = process.env.NEXT_PUBLIC_GITHUB_REPO;
 
@@ -35,7 +36,7 @@ export function Header() {
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
               <Terminal className="w-5 h-5" strokeWidth={2} aria-hidden />
             </span>
-            <span className="truncate">DevToolBox</span>
+            <span className="truncate">{SITE_NAME}</span>
           </Link>
         </div>
 

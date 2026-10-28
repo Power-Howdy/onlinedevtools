@@ -326,6 +326,7 @@ export function SignatureGeneratorTool() {
   const handleModeChange = useCallback(
     (next: SignatureMode) => {
       setS((p) => ({ ...p, mode: next }));
+      handleClear();
     },
     [setS]
   );

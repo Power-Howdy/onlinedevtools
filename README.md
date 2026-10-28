@@ -53,3 +53,27 @@ npm start
 ## License
 
 MIT © [online-dev-tools contributors](LICENSE)
+
+## Citation
+
+If you use this project's Open Graph viewer or related tooling in your research, please cite the following paper:
+
+> **Debugging the Link Card: A Design Analysis of a Browser-Based Social Preview and SEO Inspector**  
+> Severus. (2026). Zenodo. https://doi.org/10.5281/zenodo.23717626
+BibTeX entry:
+
+```bibtex
+@misc{severus2026dataexpert,
+  title     = {Data Expert: A Local-First Workbench for Versioned, Privacy-Preserving Dataset Exploration and AI-Assisted Transformation},
+  author    = {Severus},
+  year      = {2026},
+  doi       = {10.5281/zenodo.23707315},
+  url       = {https://doi.org/10.5281/zenodo.23707315},
+  publisher = {Zenodo},
+  note      = {Working paper, October 27, 2026}
+}
+```
+
+The paper describes the tool's observable scope, proposes a taxonomy of link-preview defects, and identifies design tensions that any such tool must resolve. It uses the Open Graph viewer published as part of the Online Dev Tools suite as a worked case study.
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23717626.svg)](https://doi.org/10.5281/zenodo.23717626)

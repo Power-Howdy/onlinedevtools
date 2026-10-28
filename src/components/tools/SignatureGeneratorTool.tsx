@@ -455,10 +455,7 @@ export function SignatureGeneratorTool() {
               onChange={(e) =>
                 setS((p) => ({
                   ...p,
-                  strokeWidth: Math.min(
-                    12,
-                    Math.max(1, parseInt(e.target.value, 10) || 2)
-                  ),
+                  strokeWidth: parseInt(e.target.value, 10) > 12 ? 12 : parseInt(e.target.value, 10) < 1 ? 1 : parseInt(e.target.value, 10),
                 }))
               }
               className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-mono text-sm focus:ring-2 focus:ring-neutral-400 outline-none"

@@ -9,7 +9,7 @@ import { TOOLS } from "@/lib/tools";
 export type ToolSearchProps = {
   /** Wrapper width / flex; omit for full-width bar between logo and actions */
   className?: string;
-  /** Align results under the field (use `right` when the field sits on the right of the header) */
+  /** Align results under the field on sm+ screens (use `right` when the field sits on the right of the header) */
   dropdownAlign?: "left" | "right";
 };
 
@@ -30,6 +30,7 @@ export function ToolSearch({ className, dropdownAlign = "left" }: ToolSearchProp
   useEffect(() => {
     setActiveIndex(0);
   }, [query, open]);
+
 
   const close = useCallback(() => {
     setOpen(false);
@@ -62,6 +63,7 @@ export function ToolSearch({ className, dropdownAlign = "left" }: ToolSearchProp
     };
     window.addEventListener("keydown", onEsc);
     return () => window.removeEventListener("keydown", onEsc);
+
   }, [open, close]);
 
   const goTo = useCallback(
@@ -94,6 +96,7 @@ export function ToolSearch({ className, dropdownAlign = "left" }: ToolSearchProp
   useEffect(() => {
     const el = wrapRef.current;
     if (!el || !open) return;
+
     const onFocusOut = (e: FocusEvent) => {
       const related = e.relatedTarget as Node | null;
       if (related && el.contains(related)) return;
@@ -126,16 +129,23 @@ export function ToolSearch({ className, dropdownAlign = "left" }: ToolSearchProp
           Search tools
         </label>
         <input
+
           id="tool-search-input"
           ref={inputRef}
           type="search"
+          inputMode="search"
+          enterKeyHint="go"
           autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="none"
+          spellCheck={false}
           placeholder="Search tools…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setOpen(true)}
           onKeyDown={onInputKeyDown}
-          className="w-full px-3 py-2 pl-9 rounded-lg border border-light-border bg-light-bg text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none dark:border-dark-border dark:bg-dark-bg dark:text-slate-100 dark:placeholder:text-slate-500"
+          // text-base (16px) on mobile prevents iOS Safari from zooming the page on focus
+          className="h-10 w-full min-w-0 rounded-lg border border-light-border bg-light-bg pl-9 pr-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none sm:h-auto sm:py-2 sm:text-sm dark:border-dark-border dark:bg-dark-bg dark:text-slate-100 dark:placeholder:text-slate-500"
         />
         <span
           className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-primary/60"
@@ -152,12 +162,22 @@ export function ToolSearch({ className, dropdownAlign = "left" }: ToolSearchProp
         </span>
         {open && (
           <div
+
             role="dialog"
             aria-modal="true"
             aria-label="Tool search results"
-            className={`absolute top-full mt-1 max-h-[min(70vh,24rem)] w-[min(calc(100vw-2rem),22rem)] overflow-y-auto rounded-lg border border-light-border bg-light-card shadow-lg dark:border-dark-border dark:bg-dark-card ${
-              dropdownAlign === "right" ? "right-0 left-auto" : "left-0 right-0 w-auto"
-            }`}
+            className={[
+              // Mobile: full-width panel pinned just below the fixed header
+              "fixed inset-x-3 top-[calc(3.5rem+env(safe-area-inset-top))]",
+              "max-h-[min(60dvh,24rem)] overflow-y-auto overscroll-contain",
+              "rounded-lg border border-light-border bg-light-card shadow-lg",
+              "dark:border-dark-border dark:bg-dark-card",
+              // sm+: anchored under the input like before
+              "sm:absolute sm:inset-x-auto sm:top-full sm:mt-1 sm:max-h-[min(70vh,24rem)]",
+              dropdownAlign === "right"
+                ? "sm:right-0 sm:w-[22rem] sm:max-w-[calc(100vw-2rem)]"
+                : "sm:left-0 sm:right-0 sm:w-auto",
+            ].join(" ")}
           >
             {filtered.length === 0 ? (
               <p className="px-3 py-4 text-sm text-slate-500 text-center dark:text-slate-400">
@@ -175,10 +195,11 @@ export function ToolSearch({ className, dropdownAlign = "left" }: ToolSearchProp
                         onClick={(e) => {
                           if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
                           e.preventDefault();
+
                           goTo(tool.slug);
                         }}
                         onMouseEnter={() => setActiveIndex(index)}
-                        className={`block px-3 py-2.5 text-left transition-colors ${
+                        className={`block px-3 py-3 text-left transition-colors sm:py-2.5 active:bg-slate-100 dark:active:bg-slate-800/80 ${
                           active
                             ? "bg-primary/10 dark:bg-primary/15"
                             : "hover:bg-slate-100 dark:hover:bg-slate-800/80"
@@ -199,13 +220,15 @@ export function ToolSearch({ className, dropdownAlign = "left" }: ToolSearchProp
                 })}
               </ul>
             )}
-            <p className="px-3 py-2 text-[10px] text-slate-400 border-t border-light-border dark:border-dark-border">
+            {/* Keyboard hints are meaningless on touch screens */}
+            <p className="hidden sm:block px-3 py-2 text-[10px] text-slate-400 border-t border-light-border dark:border-dark-border">
               <kbd className="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">
                 ↑↓
               </kbd>{" "}
               navigate ·{" "}
               <kbd className="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">
                 Enter
+
               </kbd>{" "}
               open ·{" "}
               <kbd className="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono">
